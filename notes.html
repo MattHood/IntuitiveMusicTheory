@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-01-14 Thu 16:42 -->
+<!-- 2021-01-16 Sat 13:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Music Theory Course for RMA</title>
@@ -247,14 +247,14 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb6507c0">1. Principles</a></li>
-<li><a href="#org6a3232a">2. Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together</a>
+<li><a href="#orgb672ce8">1. Principles</a></li>
+<li><a href="#orgfd814fd">2. Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together</a>
 <ul>
-<li><a href="#org55af8e1">2.1. Implementation</a>
+<li><a href="#org7140408">2.1. Implementation</a>
 <ul>
-<li><a href="#orgc0f990e">2.1.1. Graphics</a></li>
-<li><a href="#orgbf2ebe1">2.1.2. Audio</a></li>
-<li><a href="#orgbab85be">2.1.3. To-dos</a></li>
+<li><a href="#org5fa09e3">2.1.1. Graphics</a></li>
+<li><a href="#orgbb3ed91">2.1.2. Audio</a></li>
+<li><a href="#org4c98b6c">2.1.3. To-dos</a></li>
 </ul>
 </li>
 </ul>
@@ -263,8 +263,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgb6507c0" class="outline-2">
-<h2 id="orgb6507c0"><span class="section-number-2">1</span> Principles</h2>
+<div id="outline-container-orgb672ce8" class="outline-2">
+<h2 id="orgb672ce8"><span class="section-number-2">1</span> Principles</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Guided self-discovery via interactivity</li>
@@ -273,490 +273,51 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org6a3232a" class="outline-2">
-<h2 id="org6a3232a"><span class="section-number-2">2</span> Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together</h2>
+<div id="outline-container-orgfd814fd" class="outline-2">
+<h2 id="orgfd814fd"><span class="section-number-2">2</span> Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <b><b>Why?</b></b> Sound is a wilderness of discordance and dissonance. The machinery of tuning, scales, chords is all about finding the 'good notes', the subset of dissonance that is consonance. This exercise gives the student an appreciation of the value of elementary music theory, by experiencing how bad things are without it. This will then be a source of motivation to continue learning.
 </p>
 </div>
 
-<div id="outline-container-org55af8e1" class="outline-3">
-<h3 id="org55af8e1"><span class="section-number-3">2.1</span> Implementation</h3>
+<div id="outline-container-org7140408" class="outline-3">
+<h3 id="org7140408"><span class="section-number-3">2.1</span> Implementation</h3>
 <div class="outline-text-3" id="text-2-1">
 <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
 
-<button id="play_button">Play</button>
-<button id="stop_button">Stop</button>
-<button id="clear_button">Clear</button><br />
+<script src="frequency-resolution-applet.js"></script>
 
-<canvas id="notes" width="500" height="500"></canvas> <br />
+<div id="applet">Test</div>
 
-<button id="continuous_button">Continuous</button>
-<button id="chromatic_button">Chromatic</button>
-<button id="scale_button">Scale</button>
-<button id="chord_button">Chord</button>
-</div>
-
-<div id="outline-container-orgc0f990e" class="outline-4">
-<h4 id="orgc0f990e"><span class="section-number-4">2.1.1</span> Graphics</h4>
-<div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
-<pre class="src src-inline-js">    class MetricToFrequencyMapper {
-
-	supportedTunings = ["continuous", "chromatic", "major scale", "major triad"];
-	stops = {"continuous": 480,
-		       "chromatic": 24,
-		       "major scale": 14,
-		 "major triad": 6};
-
-	lowFreq = 440.0;
-	highFreq = this.lowFreq * 4;
-
-	// This situation smells
-	chromaticMap = (function(stop) {
-	    return this.lowFreq * Math.pow(2, stop / 12);
-	}).bind(this);
-
-	linearMap = (function(stop) {
-	    let fraction = (stop / this.stops["continuous"])
-	    let range = this.highFreq - this.lowFreq;
-	    return (fraction * range) + this.lowFreq;
-	}).bind(this);
-
-	frequencyMappers =
-	      {"continuous": this.linearMap,
-	       "chromatic": this.chromaticMap,
-	       "major scale":
-	       (function(stop) {
-		   let degrees = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23];
-		   return this.chromaticMap(degrees[stop]);
-	       }).bind(this),
-	       "major triad":
-	       (function(stop) {
-		   let degrees = [0, 4, 7, 12, 16, 19];
-		   return this.chromaticMap(degrees[stop]);
-	       }).bind(this)};
-
-	constructor(height, tuning) {
-
-	    this.height = height;
-
-	    if(this.supportedTunings.includes(tuning)) {
-		this.tuning = tuning;
-	    }
-	    else {
-		throw new TypeError("Undefined tuning")
-	    }
-
-	}
-
-	pixelToStop(pixel) {
-	    // Ascend from the bottom
-	    let level = this.height - pixel;
-	    let stopWidth = this.height / this.stops[this.tuning];
-	    let stop = Math.floor(level / stopWidth);
-	    return stop;
-	}
-
-	stopToHue(stop) {
-	    let frac = stop / this.stops[this.tuning];
-	    return 2 * frac * 360;
-	}
-
-	stopToFrequency(stop) {
-	    return this.frequencyMappers[this.tuning](stop);
-	}
-
-	pixelToHue(pixel) {
-	    return this.stopToHue(this.pixelToStop(pixel));
-	}
-
-	pixelToFrequency(pixel) {
-	    return this.stopToFrequency(this.pixelToStop(pixel));
-	}
-
-	snapPixelHeight(pixel) {
-	    let stops = this.stops[this.tuning];
-	    let halfHeight = this.height / stops / 2;
-	    let lowerHeight = Math.floor(pixel * (stops / this.height)) * (this.height / stops);
-	    let snapped = lowerHeight + halfHeight;
-	    return snapped;
-	}
-
-
-	toHSL(h, s, l) {
-	    return 'hsl(' + Math.round(h) + ',' + s + '%,' + l + '%)';
-	}
-    }
-
-    // Set up some dummy instances for testing
-    let cont = new MetricToFrequencyMapper(500, "continuous");
-    let chrom = new MetricToFrequencyMapper(500, "chromatic");
-    let scale = new MetricToFrequencyMapper(500, "major scale");
-    let chord = new MetricToFrequencyMapper(500, "major triad");
-
-    // Test colour output
-    console.log(cont.toHSL(cont.pixelToHue(210), 100, 50));
-    console.log(chrom.toHSL(chrom.pixelToHue(210), 100, 50));
-    console.log(scale.toHSL(scale.pixelToHue(210), 100, 50));
-    console.log(chord.toHSL(chord.pixelToHue(210), 100, 50));
-
-    // Test frequency output
-    console.log(cont.pixelToFrequency(210))
-    console.log(chrom.pixelToFrequency(210));
-    console.log(scale.pixelToFrequency(210));
-    console.log(chord.pixelToFrequency(210));
-
-
-  // Draw the canvas
-  function drawBackground(ctx, mapper, width, height) {
-      for(let i = 0; i &lt; height; i++) {
-	  ctx.fillStyle = mapper.toHSL(mapper.pixelToHue(i), 80, 60);
-	  ctx.fillRect(0, i, width, i + 1);
-      }
-  }
-
-  let canvasHeight = 500;
-  let canvasWidth = 500;
-  canvas = document.getElementById("notes");
-
-  clear_button = document.getElementById("clear_button");
-  ctx = canvas.getContext("2d");
-
-  window.noteSequence = [];
-  window.currentMapper = cont;
-
-  drawBackground(ctx, window.currentMapper, canvasWidth, canvasHeight);
-
-
-  // Draw a notehead, where x,y are the center co-ordinates
-  function drawNotehead(ctx, x, y) {
-      headChar = '\uD834\uDD58'
-      headSizes = ctx.measureText(headChar);
-      topX = x - Math.abs(headSizes.actualBoundingBoxLeft);
-      topY = y - Math.abs(headSizes.actualBoundingBoxAscent) + 2;
-      backupFont = ctx.font;
-      ctx.font = '72px serif';
-      ctx.fillStyle = 'hsl(0, 100%, 0%)'
-      ctx.fillText(headChar, topX, topY);
-      ctx.font = backupFont;
-  }
-
-  function addNote(f, t) {
-      window.noteSequence.push({freq: f, time: t});
-  }
-
-  function clearNotes() {
-      window.noteSequence = [];
-  }
-
-  function enterNote(x, y) {
-      freq = window.currentMapper.pixelToFrequency(y);
-      time = x;
-      drawY = window.currentMapper.snapPixelHeight(y);
-      drawX = x;
-
-      addNote(freq, time);
-      drawNotehead(ctx, drawX, drawY);
-  }
-
-  function handleClick(event) {
-      let rect = canvas.getBoundingClientRect();
-      let x = event.clientX - rect.left;
-      let y = event.clientY - rect.top;
-
-      enterNote(x, y);
-
-      console.log(window.noteSequence);
-  }
-
-  function clearCanvas() {
-      clearNotes();
-      drawBackground(ctx, window.window.currentMapper, canvasWidth, canvasHeight);
-  }
-
-// Canvas event handlers
-canvas.addEventListener("mousedown", handleClick);
-clear_button.onclick = clearCanvas;
-
-// Change note resolution
-continuous_button = document.getElementById("continuous_button");
-chromatic_button = document.getElementById("chromatic_button");
-scale_button = document.getElementById("scale_button");
-chord_button = document.getElementById("chord_button");
-
-function resolutionChanger(mapper) {
-    return function() {
-	window.currentMapper = mapper;
-	clearCanvas();
-    };
-}
-
-continuous_button.onclick = resolutionChanger(cont);
-chromatic_button.onclick = resolutionChanger(chrom);
-scale_button.onclick = resolutionChanger(scale);
-chord_button.onclick = resolutionChanger(chord);
+<pre class="src src-inline-js">let parent = document.getElementById("applet");
+let fra = new FrequencyResolutionApplet(parent, 700, 500, "major scale");
+console.log("1");
 </pre>
 </div>
 
 <script type="text/javascript">
-    class MetricToFrequencyMapper {
-
-        supportedTunings = ["continuous", "chromatic", "major scale", "major triad"];
-        stops = {"continuous": 480,
-                       "chromatic": 24,
-                       "major scale": 14,
-                 "major triad": 6};
-
-        lowFreq = 440.0;
-        highFreq = this.lowFreq * 4;
-
-        // This situation smells
-        chromaticMap = (function(stop) {
-            return this.lowFreq * Math.pow(2, stop / 12);
-        }).bind(this);
-
-        linearMap = (function(stop) {
-            let fraction = (stop / this.stops["continuous"])
-            let range = this.highFreq - this.lowFreq;
-            return (fraction * range) + this.lowFreq;
-        }).bind(this);
-
-        frequencyMappers =
-              {"continuous": this.linearMap,
-               "chromatic": this.chromaticMap,
-               "major scale":
-               (function(stop) {
-                   let degrees = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23];
-                   return this.chromaticMap(degrees[stop]);
-               }).bind(this),
-               "major triad":
-               (function(stop) {
-                   let degrees = [0, 4, 7, 12, 16, 19];
-                   return this.chromaticMap(degrees[stop]);
-               }).bind(this)};
-
-        constructor(height, tuning) {
-
-            this.height = height;
-
-            if(this.supportedTunings.includes(tuning)) {
-                this.tuning = tuning;
-            }
-            else {
-                throw new TypeError("Undefined tuning")
-            }
-
-        }
-
-        pixelToStop(pixel) {
-            // Ascend from the bottom
-            let level = this.height - pixel;
-            let stopWidth = this.height / this.stops[this.tuning];
-            let stop = Math.floor(level / stopWidth);
-            return stop;
-        }
-
-        stopToHue(stop) {
-            let frac = stop / this.stops[this.tuning];
-            return 2 * frac * 360;
-        }
-
-        stopToFrequency(stop) {
-            return this.frequencyMappers[this.tuning](stop);
-        }
-
-        pixelToHue(pixel) {
-            return this.stopToHue(this.pixelToStop(pixel));
-        }
-
-        pixelToFrequency(pixel) {
-            return this.stopToFrequency(this.pixelToStop(pixel));
-        }
-
-        snapPixelHeight(pixel) {
-            let stops = this.stops[this.tuning];
-            let halfHeight = this.height / stops / 2;
-            let lowerHeight = Math.floor(pixel * (stops / this.height)) * (this.height / stops);
-            let snapped = lowerHeight + halfHeight;
-            return snapped;
-        }
-
-
-        toHSL(h, s, l) {
-            return 'hsl(' + Math.round(h) + ',' + s + '%,' + l + '%)';
-        }
-    }
-
-    // Set up some dummy instances for testing
-    let cont = new MetricToFrequencyMapper(500, "continuous");
-    let chrom = new MetricToFrequencyMapper(500, "chromatic");
-    let scale = new MetricToFrequencyMapper(500, "major scale");
-    let chord = new MetricToFrequencyMapper(500, "major triad");
-
-    // Test colour output
-    console.log(cont.toHSL(cont.pixelToHue(210), 100, 50));
-    console.log(chrom.toHSL(chrom.pixelToHue(210), 100, 50));
-    console.log(scale.toHSL(scale.pixelToHue(210), 100, 50));
-    console.log(chord.toHSL(chord.pixelToHue(210), 100, 50));
-
-    // Test frequency output
-    console.log(cont.pixelToFrequency(210))
-    console.log(chrom.pixelToFrequency(210));
-    console.log(scale.pixelToFrequency(210));
-    console.log(chord.pixelToFrequency(210));
-
-
-  // Draw the canvas
-  function drawBackground(ctx, mapper, width, height) {
-      for(let i = 0; i < height; i++) {
-          ctx.fillStyle = mapper.toHSL(mapper.pixelToHue(i), 80, 60);
-          ctx.fillRect(0, i, width, i + 1);
-      }
-  }
-
-  let canvasHeight = 500;
-  let canvasWidth = 500;
-  canvas = document.getElementById("notes");
-
-  clear_button = document.getElementById("clear_button");
-  ctx = canvas.getContext("2d");
-
-  window.noteSequence = [];
-  window.currentMapper = cont;
-
-  drawBackground(ctx, window.currentMapper, canvasWidth, canvasHeight);
-
-
-  // Draw a notehead, where x,y are the center co-ordinates
-  function drawNotehead(ctx, x, y) {
-      headChar = '\uD834\uDD58'
-      headSizes = ctx.measureText(headChar);
-      topX = x - Math.abs(headSizes.actualBoundingBoxLeft);
-      topY = y - Math.abs(headSizes.actualBoundingBoxAscent) + 2;
-      backupFont = ctx.font;
-      ctx.font = '72px serif';
-      ctx.fillStyle = 'hsl(0, 100%, 0%)'
-      ctx.fillText(headChar, topX, topY);
-      ctx.font = backupFont;
-  }
-
-  function addNote(f, t) {
-      window.noteSequence.push({freq: f, time: t});
-  }
-
-  function clearNotes() {
-      window.noteSequence = [];
-  }
-
-  function enterNote(x, y) {
-      freq = window.currentMapper.pixelToFrequency(y);
-      time = x;
-      drawY = window.currentMapper.snapPixelHeight(y);
-      drawX = x;
-
-      addNote(freq, time);
-      drawNotehead(ctx, drawX, drawY);
-  }
-
-  function handleClick(event) {
-      let rect = canvas.getBoundingClientRect();
-      let x = event.clientX - rect.left;
-      let y = event.clientY - rect.top;
-
-      enterNote(x, y);
-
-      console.log(window.noteSequence);
-  }
-
-  function clearCanvas() {
-      clearNotes();
-      drawBackground(ctx, window.window.currentMapper, canvasWidth, canvasHeight);
-  }
-
-// Canvas event handlers
-canvas.addEventListener("mousedown", handleClick);
-clear_button.onclick = clearCanvas;
-
-// Change note resolution
-continuous_button = document.getElementById("continuous_button");
-chromatic_button = document.getElementById("chromatic_button");
-scale_button = document.getElementById("scale_button");
-chord_button = document.getElementById("chord_button");
-
-function resolutionChanger(mapper) {
-    return function() {
-        window.currentMapper = mapper;
-        clearCanvas();
-    };
-}
-
-continuous_button.onclick = resolutionChanger(cont);
-chromatic_button.onclick = resolutionChanger(chrom);
-scale_button.onclick = resolutionChanger(scale);
-chord_button.onclick = resolutionChanger(chord);
+let parent = document.getElementById("applet");
+let fra = new FrequencyResolutionApplet(parent, 700, 500, "major scale");
+console.log("1");
 </script>
 </div>
+
+<div id="outline-container-org5fa09e3" class="outline-4">
+<h4 id="org5fa09e3"><span class="section-number-4">2.1.1</span> Graphics</h4>
 </div>
-
-<div id="outline-container-orgbf2ebe1" class="outline-4">
-<h4 id="orgbf2ebe1"><span class="section-number-4">2.1.2</span> Audio</h4>
-<div class="outline-text-4" id="text-2-1-2">
-<div class="org-src-container">
-<pre class="src src-inline-js">
-  play_button = document.getElementById("play_button");
-  stop_button = document.getElementById("stop_button");
-
-const synth = new Tone.PolySynth();
-synth.connect(Tone.context.destination);
-
-
-  function play() {
-      let now = Tone.now();
-      window.noteSequence.forEach(function(note) {
-	  synth.triggerAttackRelease(note.freq, 0.1, now + note.time / 100);
-	  console.log(note);
-      });
-  }
-
-  play_button.onclick = play;
-</pre>
+<div id="outline-container-orgbb3ed91" class="outline-4">
+<h4 id="orgbb3ed91"><span class="section-number-4">2.1.2</span> Audio</h4>
 </div>
-
-<script type="text/javascript">
-
-  play_button = document.getElementById("play_button");
-  stop_button = document.getElementById("stop_button");
-
-const synth = new Tone.PolySynth();
-synth.connect(Tone.context.destination);
-
-
-  function play() {
-      let now = Tone.now();
-      window.noteSequence.forEach(function(note) {
-          synth.triggerAttackRelease(note.freq, 0.1, now + note.time / 100);
-          console.log(note);
-      });
-  }
-
-  play_button.onclick = play;
-</script>
-</div>
-</div>
-
-
-
-
-<div id="outline-container-orgbab85be" class="outline-4">
-<h4 id="orgbab85be"><span class="section-number-4">2.1.3</span> To-dos</h4>
+<div id="outline-container-org4c98b6c" class="outline-4">
+<h4 id="org4c98b6c"><span class="section-number-4">2.1.3</span> To-dos</h4>
 <div class="outline-text-4" id="text-2-1-3">
 </div>
 <ol class="org-ol">
-<li><a id="org23bae25"></a><span class="todo TODO">TODO</span> Use a polyphonic synth to address bugs in adjacent notes<br /></li>
-<li><a id="orga60f678"></a><span class="todo TODO">TODO</span> Refactor into a single component<br /></li>
-<li><a id="org2177068"></a><span class="todo TODO">TODO</span> Adjust saturation brightness per mode.<br /></li>
+<li><a id="orgb3b57b4"></a><span class="done DONE">DONE</span> Use a polyphonic synth to address bugs in adjacent notes<br /></li>
+<li><a id="org2cda022"></a><span class="todo TODO">TODO</span> Refactor into a single component<br /></li>
+<li><a id="org319ab05"></a><span class="todo TODO">TODO</span> Adjust saturation brightness per mode.<br /></li>
 </ol>
 </div>
 </div>
@@ -764,7 +325,7 @@ synth.connect(Tone.context.destination);
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Hood</p>
-<p class="date">Created: 2021-01-14 Thu 16:42</p>
+<p class="date">Created: 2021-01-16 Sat 13:44</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -29,20 +29,19 @@ Source: https://www.reddit.com/r/orgmode/comments/5bi6ku/tip_for_exporting_javas
 #+begin_export html
 <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
 
-<button id="play_button">Play</button>
-<button id="stop_button">Stop</button>
-<button id="clear_button">Clear</button><br />
+<script src="frequency-resolution-applet.js"></script>
 
-<canvas id="notes" width="500" height="500"></canvas> <br />
-
-<button id="continuous_button">Continuous</button>
-<button id="chromatic_button">Chromatic</button>
-<button id="scale_button">Scale</button>
-<button id="chord_button">Chord</button>
+<div id="applet">Test</div>
 #+end_export
 
-*** Graphics
 #+begin_src inline-js :exports both
+  let parent = document.getElementById("applet");
+  let fra = new FrequencyResolutionApplet(parent, 700, 500, "major scale");
+  console.log("1");
+#+end_src
+
+*** Graphics
+#+begin_src inline-js :exports none
       class MetricToFrequencyMapper {
 
           supportedTunings = ["continuous", "chromatic", "major scale", "major triad"];
@@ -241,7 +240,7 @@ Source: https://www.reddit.com/r/orgmode/comments/5bi6ku/tip_for_exporting_javas
 #+end_src
 
 *** Audio
-#+begin_src inline-js :exports both
+#+begin_src inline-js :exports none
 
     play_button = document.getElementById("play_button");
     stop_button = document.getElementById("stop_button");
@@ -265,7 +264,7 @@ Source: https://www.reddit.com/r/orgmode/comments/5bi6ku/tip_for_exporting_javas
 
 
 *** To-dos
-**** TODO Use a polyphonic synth to address bugs in adjacent notes
+**** DONE Use a polyphonic synth to address bugs in adjacent notes
 **** TODO Refactor into a single component
 **** TODO Adjust saturation brightness per mode.
 
