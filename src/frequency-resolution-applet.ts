@@ -1,3 +1,5 @@
+const PIXEL_RATE = 100;
+
 function equalTemperament(base, steps) {
     return base * Math.pow(2, steps / 12);
 }
@@ -9,19 +11,17 @@ class ContinuousMapper {
 	this.stops = 480;
     }
 
-    stopToHue(stop) {
+    stopToHSL(stop) {
 	let frac = stop / this.stops;
-	return 2 * frac * 360;
+	let hue = 2 * frac * 360;
+	let lightness = stop < this.stops / 2 ? 45 : 60;
+	return {h: hue, s: 80, l: lightness};
     }
 
     stopToFrequency(stop) {
 	let frac = stop / this.stops;
 	let range = this.highFreq - this.lowFreq;
 	return (frac * range) + this.lowFreq;
-    }
-
-    get stops() {
-	return this.stops;
     }
 }
 
@@ -32,17 +32,15 @@ class ChromaticMapper {
 	this.stops = 24;
     }
 
-    stopToHue(stop) {
+    stopToHSL(stop) {
 	let frac = stop / this.stops;
-	return 2 * frac * 360;
+	let hue = 2 * frac * 360;
+	let lightness = stop < this.stops / 2 ? 45 : 60;
+	return {h: hue, s: 80, l: lightness};
     }
 
     stopToFrequency(stop) {
 	return equalTemperament(this.lowFreq, stop);
-    }
-
-    get stops() {
-	return this.stops;
     }
 }
 
@@ -53,18 +51,16 @@ class ScaleMapper {
 	this.stops = 14;
     }
 
-    stopToHue(stop) {
+    stopToHSL(stop) {
 	let frac = stop / this.stops;
-	return 2 * frac * 360;
+	let hue = 2 * frac * 360;
+	let lightness = stop < this.stops / 2 ? 45 : 60;
+	return {h: hue, s: 80, l: lightness};
     }
 
     stopToFrequency(stop) {
 	let degrees = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23];
 	return equalTemperament(this.lowFreq, degrees[stop]);
-    }
-
-    get stops() {
-	return this.stops;
     }
 }
 
@@ -72,21 +68,19 @@ class ChordMapper {
     constructor(lowFreq, highFreq) {
 	this.lowFreq = lowFreq;
 	this.highFreq = highFreq;
-	this.stops = 14;
+	this.stops = 6;
     }
 
-    stopToHue(stop) {
-	let frac = stop / this.stops;
-	return 2 * frac * 360;
+    stopToHSL(stop) {
+	let frac = (stop + 0.3) / this.stops;
+	let hue = 2 * frac * 360;
+	let lightness = stop < this.stops / 2 ? 45 : 60;
+	return {h: hue, s: 80, l: lightness};
     }
 
     stopToFrequency(stop) {
 	let degrees = [0, 4, 7, 12, 16, 19];
 	return equalTemperament(this.lowFreq, degrees[stop]);
-    }
-
-    get stops() {
-	return this.stops;
     }
 }
 
@@ -94,14 +88,17 @@ class Mapper {
     constructor(height, tuning) {
 	this.height = height;
 
+	let lowFreq = 400;
+	let highFreq = lowFreq * 4;
+
 	if(tuning == "continuous") {
-	    this.mapper = ContinuousMapper;
+	    this.mapper = new ContinuousMapper(lowFreq, highFreq);
 	} else if (tuning == "chromatic") {
-	    this.mapper = ChromaticMapper;
+	    this.mapper = new ChromaticMapper(lowFreq, highFreq);
 	} else if (tuning == "major scale") {
-	    this.mapper = ScaleMapper;
+	    this.mapper = new ScaleMapper(lowFreq, highFreq);
 	} else if (tuning == "major chord") {
-	    this.mapper = ChordMapper;
+	    this.mapper = new ChordMapper(lowFreq, highFreq);
 	} else {
 	    throw new TypeError("Undefined Tuning: '" + tuning + "'");
 	}
@@ -115,8 +112,8 @@ class Mapper {
         return stop;
     }
 
-    pixelToHue(pixel) {
-        return this.mapper.stopToHue(this.pixelToStop(pixel));
+    pixelToHSL(pixel) {
+        return this.mapper.stopToHSL(this.pixelToStop(pixel));
     }
 
     pixelToFrequency(pixel) {
@@ -133,26 +130,41 @@ class Mapper {
 }
 
 class Sound {
-    constructor() {
+    constructor(width) {
 	this.noteSequence = [];
 	this.synth = new Tone.PolySynth();
 	this.synth.connect(Tone.context.destination);
+	this.width = width;
+    }
+
+    quantizeTime(unquantized) {
+	let pixelRate = 100;
+	let subdivision = 4;
+	let unit = pixelRate / subdivision;
+
+	return Math.round(unquantized / unit) * unit;
     }
     
     addNote(f, t) {
-        this.noteSequence.push({freq: f, time: t});
+	let quantized = this.quantizeTime(t);
+        this.noteSequence.push({freq: f, time: quantized});
+	this.noteSequence.sort(function(a, b) {
+	    return a.time - b.time;
+	});
+	console.log(this.noteSequence);
     }
 
     clearNotes() {
         this.noteSequence = [];
     }
 
+    
+
     play() {
 	let now = Tone.now();
-        this.noteSequence.forEach(function(note) {
+        this.noteSequence.forEach((function(note) {
             this.synth.triggerAttackRelease(note.freq, 0.1, now + note.time / 100);
-            console.log(note);
-        });
+        }).bind(this));
     }
 }
 
@@ -164,24 +176,24 @@ class Graphics {
 	this.width = canvas.width;
     }
 
-    toHSL(h, s, l) {
-              return 'hsl(' + Math.round(h) + ',' + s + '%,' + l + '%)';
+    toHSLString(x) {
+              return 'hsl(' + Math.round(x.h) + ',' + x.s + '%,' + x.l + '%)';
     }
 
     // Draw the canvas
     drawBackground(mapper) {
-        for(let i = 0; i < height; i++) {
-            this.ctx.fillStyle = this.toHSL(mapper.pixelToHue(i), 80, 60);
+        for(let i = 0; i < this.height; i++) {
+            this.ctx.fillStyle = this.toHSLString(mapper.pixelToHSL(i));
             this.ctx.fillRect(0, i, this.width, i + 1);
         }
     }
 
     drawNotehead(x, y) {
-        headChar = '\uD834\uDD58'
-        headSizes = this.ctx.measureText(headChar);
-        topX = x - Math.abs(headSizes.actualBoundingBoxLeft);
-        topY = y - Math.abs(headSizes.actualBoundingBoxAscent) + 2;
-        backupFont = this.ctx.font;
+        let headChar = '\uD834\uDD58'
+        let headSizes = this.ctx.measureText(headChar);
+        let topX = x - Math.abs(headSizes.actualBoundingBoxLeft);
+        let topY = y - Math.abs(headSizes.actualBoundingBoxAscent) + 2;
+        let backupFont = this.ctx.font;
         this.ctx.font = '72px serif';
         this.ctx.fillStyle = 'hsl(0, 100%, 0%)'
         this.ctx.fillText(headChar, topX, topY);
@@ -227,54 +239,70 @@ class FrequencyResolutionApplet {
 	this.break1 = document.createElement("br");
 	this.break2 = document.createElement("br");
 
-	appendTo(this.container, [this.upperContainer, this.break1,
+	appendTo(this.container, [this.upperContainer,
+				  this.break1,
 				  this.canvas,
 				  this.break2,
 				  this.lowerContainer]);
 	parent.appendChild(this.container);
     }
 
-    connectEvents() {
-	this.playButton.onclick = this.sound.play();
-	this.clearButton.onclick = function() {
-	    this.sound.clearNotes();
-	    this.graphics.drawBackground();
-	}
+    clearCanvas() {
+	this.sound.clearNotes();
+	this.graphics.drawBackground(this.mapper);
+    }
 
-	function resolutionChanger(tuning) {
+    connectEvents() {
+	// TODO Fix scope issues that require bind()
+	this.playButton.onclick = (function() {
+	    this.sound.play();
+	}).bind(this);
+	this.clearButton.onclick = (function() {
+	    this.sound.clearNotes();
+	    this.graphics.drawBackground(this.mapper);
+	}).bind(this);
+
+	function resolutionChanger(tuning, caller) {
 	    return function() {
-		this.mapper = new Mapper(this.height, tuning);
-	    }
+		caller.mapper = new Mapper(caller.height, tuning);
+		caller.clearCanvas();
+		
+	    };
 	}
 	
-	this.continuousButton.onclick = resolutionChanger("continuous");
-	this.chromaticButton.onclick = resolutionChanger("chromatic");
-	this.scaleButton.onclick = resolutionChanger("major scale");
-	this.chordButton.onclick = resolutionChanger("major chord");
+	this.continuousButton.onclick = resolutionChanger("continuous", this);
+	this.chromaticButton.onclick = resolutionChanger("chromatic", this);
+	this.scaleButton.onclick = resolutionChanger("major scale", this);
+	this.chordButton.onclick = resolutionChanger("major chord", this);
 
-	this.canvas.mousedown = function(event) {
+	let handleClick = (function(event) {
 	    let rect = this.canvas.getBoundingClientRect();
             let x = event.clientX - rect.left;
             let y = event.clientY - rect.top;
 
-	    freq = mapper.pixelToFrequency(y);
-            time = x;
-            drawY = mapper.snapPixelHeight(y);
-            drawX = x;
+	    
+
+	    let freq = this.mapper.pixelToFrequency(y);
+            let time = x;
+            let drawY = this.mapper.snapPixelHeight(y);
+            let drawX = this.sound.quantizeTime(x); // TODO: Move quantize function to better location
 
             this.sound.addNote(freq, time);
-            this.graphics.drawNotehead(ctx, drawX, drawY);
-	}
+            this.graphics.drawNotehead(drawX, drawY);
+	}).bind(this);
+	this.canvas.addEventListener("mousedown", handleClick);
+
+	
 	    
     }
 
     constructor(parent, width, height, initialTuning) {
 	this.buildUI(parent, width, height);
 	this.height = height;
-	this.sound = new Sound();
+	this.sound = new Sound(width);
 	this.graphics = new Graphics(this.canvas);
-	console.log(initialTuning);
 	this.mapper = new Mapper(height, initialTuning);
+	this.clearCanvas(this.mapper);
 	this.connectEvents();
     }
 }
