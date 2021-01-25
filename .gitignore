@@ -1,4 +1,7 @@
-notes.html~
-notes.org~
+*~
 .DS_Store
-frequency-resolution-applet.js~
+node_modules/
+dist/
+.cache/
+.log/
+

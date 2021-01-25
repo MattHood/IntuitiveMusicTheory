@@ -1,74 +1,87 @@
-const PIXEL_RATE = 100;
+import * as Tone from 'tone'
 
 function equalTemperament(base, steps) {
     return base * Math.pow(2, steps / 12);
 }
 
-class ContinuousMapper {
-    constructor(lowFreq, highFreq) {
-	this.lowFreq = lowFreq;
-	this.highFreq = highFreq;
-	this.stops = 480;
+interface HSL {
+  h: number;
+  s: number;
+  l: number;
+}
+
+abstract class  MapperImp {
+  lowFreq: number;
+  highFreq: number;
+  stops: number;
+  
+  constructor(lowFreq, highFreq, stops) {
+    this.lowFreq = lowFreq;
+    this.highFreq = highFreq;
+    this.stops = stops;
+  }
+  
+  abstract stopToFrequency(stop: number): number;
+  abstract stopToHSL(stop: number): HSL;
+}
+
+class ContinuousMapper extends MapperImp {
+  constructor(lowFreq: number, highFreq: number) {
+      super(lowFreq, highFreq, 480);
     }
 
-    stopToHSL(stop) {
+  stopToHSL(stop: number): HSL {
 	let frac = stop / this.stops;
 	let hue = 2 * frac * 360;
 	let lightness = stop < this.stops / 2 ? 45 : 60;
 	return {h: hue, s: 80, l: lightness};
     }
 
-    stopToFrequency(stop) {
+  stopToFrequency(stop: number): number {
 	let frac = stop / this.stops;
 	let range = this.highFreq - this.lowFreq;
 	return (frac * range) + this.lowFreq;
     }
 }
 
-class ChromaticMapper {
+class ChromaticMapper extends MapperImp {
     constructor(lowFreq, highFreq) {
-	this.lowFreq = lowFreq;
-	this.highFreq = highFreq;
-	this.stops = 24;
+      super(lowFreq, highFreq, 24);
     }
 
-    stopToHSL(stop) {
+  stopToHSL(stop: number): HSL {
 	let frac = stop / this.stops;
 	let hue = 2 * frac * 360;
 	let lightness = stop < this.stops / 2 ? 45 : 60;
 	return {h: hue, s: 80, l: lightness};
     }
 
-    stopToFrequency(stop) {
+  stopToFrequency(stop: number): number {
 	return equalTemperament(this.lowFreq, stop);
     }
 }
 
-class ScaleMapper {
+class ScaleMapper extends MapperImp {
     constructor(lowFreq, highFreq) {
-	this.lowFreq = lowFreq;
-	this.highFreq = highFreq;
-	this.stops = 14;
+      super(lowFreq, highFreq, 14);
     }
 
-    stopToHSL(stop) {
+  stopToHSL(stop: number): HSL {
 	let frac = stop / this.stops;
 	let hue = 2 * frac * 360;
 	let lightness = stop < this.stops / 2 ? 45 : 60;
 	return {h: hue, s: 80, l: lightness};
     }
 
-    stopToFrequency(stop) {
+  stopToFrequency(stop: number): number {
 	let degrees = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23];
 	return equalTemperament(this.lowFreq, degrees[stop]);
     }
 }
 
-class ChordMapper {
+class ChordMapper extends MapperImp {
     constructor(lowFreq, highFreq) {
-	this.lowFreq = lowFreq;
-	this.highFreq = highFreq;
-	this.stops = 6;
+      super(lowFreq, highFreq, 6);
     }
 
     stopToHSL(stop) {
@@ -85,6 +98,8 @@ class ChordMapper {
 }
 
 class Mapper {
+  height: number;
+  mapper: MapperImp;
     constructor(height, tuning) {
 	this.height = height;
 
@@ -129,11 +144,19 @@ class Mapper {
     }	
 }
 
+interface Note {
+  freq: number;
+  time: number;
+}
+
 class Sound {
+  noteSequence: Note[];
+  synth: any;
+  width: number;
+  
     constructor(width) {
 	this.noteSequence = [];
-	this.synth = new Tone.PolySynth();
-	this.synth.connect(Tone.context.destination);
+	this.synth = new Tone.PolySynth().toDestination();
 	this.width = width;
     }
 
@@ -151,7 +174,7 @@ class Sound {
 	this.noteSequence.sort(function(a, b) {
 	    return a.time - b.time;
 	});
-	console.log(this.noteSequence);
+	this.synth.triggerAttackRelease(f, 0.1);
     }
 
     clearNotes() {
@@ -169,6 +192,10 @@ class Sound {
 }
 
 class Graphics {
+  canvas: HTMLElement;
+  ctx: any;
+  height: number;
+  width: number;
     constructor(canvas) {
 	this.canvas = canvas;
 	this.ctx = canvas.getContext('2d');
@@ -203,6 +230,26 @@ class Graphics {
 }
 
 class FrequencyResolutionApplet {
+  container: any;
+  canvas: any;
+  upperContainer: any;
+  playButton: any;
+  clearButton: any;
+  lowerContainer: any;
+  continuousButton: any;
+  chromaticButton: any;
+  scaleButton: any;
+  chordButton: any;
+  break1: any;
+  break2: any;
+
+  height: number;
+  sound: Sound;
+  graphics: Graphics;
+  mapper: Mapper;
+  
+  
+  
     buildUI(parent, width, height) {
 	function button(text) {
 	    let t = document.createElement("button");
@@ -302,8 +349,10 @@ class FrequencyResolutionApplet {
 	this.sound = new Sound(width);
 	this.graphics = new Graphics(this.canvas);
 	this.mapper = new Mapper(height, initialTuning);
-	this.clearCanvas(this.mapper);
+	this.clearCanvas();
 	this.connectEvents();
     }
 }
+
+export { FrequencyResolutionApplet };
 

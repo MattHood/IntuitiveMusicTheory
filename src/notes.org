@@ -65,5 +65,20 @@ Aural Interval objects could be placed inline with text, featuring
 
 
 * Technical notes
-** TODO Add Parcel (or any other bundler)
-** TODO Add TypeScript for better future proofing
+** DONE Add Webpack
+** DONE Add TypeScript for better future proofing
+** DONE Stick config in an org file
+** DONE TypeScript in emacs
+** TODO Fix iOS note-is-a-box bug
+** TODO Org time tracking
+** TODO Change name to "Intuitive Music Theory" ?
+
+* Time tracking
+Clock in: 'C-c C-x C-i'
+Clock out: 'C-c C-x C-o'
+** Test time tracking
+:LOGBOOK:
+CLOCK: [2021-01-25 Mon 18:59]--[2021-01-25 Mon 19:00] =>  0:01
+:END:
+** VC after big reshuffle
+
