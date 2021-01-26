@@ -14,3 +14,4 @@ Reveal.initialize({
       
 let parent = document.getElementById("applet");
 let fra = new FrequencyResolutionApplet(parent, 700, 500, "major scale");
+
