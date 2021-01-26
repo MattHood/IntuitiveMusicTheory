@@ -192,39 +192,36 @@ class Sound {
 }
 
 class Graphics {
-  canvas: HTMLElement;
+  canvas: HTMLCanvasElement;
   ctx: any;
   height: number;
   width: number;
-    constructor(canvas) {
-	this.canvas = canvas;
-	this.ctx = canvas.getContext('2d');
-	this.height = canvas.height;
-	this.width = canvas.width;
+  notehead: HTMLImageElement;
+    constructor(canvas: HTMLCanvasElement) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext('2d');
+      this.height = canvas.height;
+      this.width = canvas.width;
+      this.notehead = new Image();
+      this.notehead.src = "semibreve.svg";
     }
 
     toHSLString(x) {
-              return 'hsl(' + Math.round(x.h) + ',' + x.s + '%,' + x.l + '%)';
+      return 'hsl(' + Math.round(x.h) + ',' + x.s + '%,' + x.l + '%)';
     }
 
     // Draw the canvas
     drawBackground(mapper) {
-        for(let i = 0; i < this.height; i++) {
-            this.ctx.fillStyle = this.toHSLString(mapper.pixelToHSL(i));
-            this.ctx.fillRect(0, i, this.width, i + 1);
-        }
+      for(let i = 0; i < this.height; i++) {
+        this.ctx.fillStyle = this.toHSLString(mapper.pixelToHSL(i));
+        this.ctx.fillRect(0, i, this.width, i + 1);
+      }
     }
-
+  
     drawNotehead(x, y) {
-        let headChar = '\uD834\uDD58'
-        let headSizes = this.ctx.measureText(headChar);
-        let topX = x - Math.abs(headSizes.actualBoundingBoxLeft);
-        let topY = y - Math.abs(headSizes.actualBoundingBoxAscent) + 2;
-        let backupFont = this.ctx.font;
-        this.ctx.font = '72px serif';
-        this.ctx.fillStyle = 'hsl(0, 100%, 0%)'
-        this.ctx.fillText(headChar, topX, topY);
-        this.ctx.font = backupFont;
+      let topX = x - Math.abs(this.notehead.width);
+      let topY = y - Math.abs(this.notehead.height) + 7;
+      this.ctx.drawImage(this.notehead, topX, topY);
     }
     
 }

@@ -1,5 +1,5 @@
 {
-  "name": "music-theory-course",
+  "name": "intuitive-music-theory",
   "version": "0.1.0",
   "description": "Interactive course on music theory",
   "private": true,
@@ -11,15 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MattHood/MusicTheoryCourse.git"
+    "url": "git+https://github.com/MattHood/IntuitiveMusicTheory.git"
   },
   "author": "Matt Hood",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/MattHood/MusicTheoryCourse/issues"
+    "url": "https://github.com/MattHood/IntuitiveMusicTheory/issues"
   },
-  "homepage": "https://github.com/MattHood/MusicTheoryCourse#readme",
+  "homepage": "https://github.com/MattHood/IntuitiveMusicTheory#readme",
   "devDependencies": {
+    "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "fitty": "^2.3.3",

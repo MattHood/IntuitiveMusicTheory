@@ -63,14 +63,19 @@ Aural Interval objects could be placed inline with text, featuring
 
 * Guitar-hero style tapping game to learm rhythms. Allow building of custom levels. Score based on accuracy.
 
+* For relative pitch: play a song in a random key - first through earphones, then everyone together - note that they can still recognise the song even though the notes are totally different.
+
+
 
 * Technical notes
 ** DONE Add Webpack
 ** DONE Add TypeScript for better future proofing
 ** DONE Stick config in an org file
 ** DONE TypeScript in emacs
-** TODO Fix iOS note-is-a-box bug
-** TODO Org time tracking
+** DONE Fix iOS note-is-a-box bug
+** TODO Fix no sound on iOS
+** TODO Make webpack copy assets
+** DONE Org time tracking
 ** TODO Change name to "Intuitive Music Theory" ?
 
 * Time tracking
@@ -80,5 +85,8 @@ Clock out: 'C-c C-x C-o'
 :LOGBOOK:
 CLOCK: [2021-01-25 Mon 18:59]--[2021-01-25 Mon 19:00] =>  0:01
 :END:
-** VC after big reshuffle
+** 
+:LOGBOOK:
+CLOCK: [2021-01-26 Tue 16:33]
+:END:
 
