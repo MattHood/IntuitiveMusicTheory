@@ -226,19 +226,22 @@ class Graphics {
     
 }
 
+type Div = HTMLDivElement;
+type Button = HTMLButtonElement;
+
 class FrequencyResolutionApplet {
-  container: any;
-  canvas: any;
-  upperContainer: any;
-  playButton: any;
-  clearButton: any;
-  lowerContainer: any;
-  continuousButton: any;
-  chromaticButton: any;
-  scaleButton: any;
-  chordButton: any;
-  break1: any;
-  break2: any;
+  container: Div;
+  canvas: HTMLCanvasElement;
+  upperContainer: Div;
+  playButton: Button;
+  clearButton: Button;
+  lowerContainer: Div;
+  continuousButton: Button;
+  chromaticButton: Button;
+  scaleButton: Button;
+  chordButton: Button;
+  break1: HTMLBreakElement;
+  break2: HTMLBreakElement;
 
   height: number;
   sound: Sound;
@@ -247,16 +250,16 @@ class FrequencyResolutionApplet {
   
   
   
-    buildUI(parent, width, height) {
-	function button(text) {
-	    let t = document.createElement("button");
-	    t.innerHTML = text;
-	    return t;
-	}
+  buildUI(width: number, height: number): void {
+    function button(text: string): Button {
+      let t = document.createElement("button");
+      t.innerHTML = text;
+      return t;
+    }
 
-	function appendTo(parent, children) {
-	    children.forEach( (el) => parent.appendChild(el) );
-	}
+    function appendTo(parent: HTMLElement, children: HTMLElement): void {
+      children.forEach( (el) => parent.appendChild(el) );
+    }
 	
 	this.container = document.createElement("div");
 
@@ -288,7 +291,6 @@ class FrequencyResolutionApplet {
 				  this.canvas,
 				  this.break2,
 				  this.lowerContainer]);
-	parent.appendChild(this.container);
     }
 
     clearCanvas() {
@@ -335,13 +337,14 @@ class FrequencyResolutionApplet {
             this.graphics.drawNotehead(drawX, drawY);
 	}).bind(this);
 	this.canvas.addEventListener("mousedown", handleClick);
+  }
 
-	
-	    
-    }
+  getApplet(): Div {
+    return this.container;
+  }
 
-    constructor(parent, width, height, initialTuning) {
-	this.buildUI(parent, width, height);
+    constructor(width, height, initialTuning) {
+	this.buildUI(width, height);
 	this.height = height;
 	this.sound = new Sound(width);
 	this.graphics = new Graphics(this.canvas);
