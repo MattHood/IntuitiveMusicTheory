@@ -1,3 +1,0 @@
-[submodule "src/libintuitive"]
-	path = src/libintuitive
-	url = https://github.com/MattHood/libintuitive.git
