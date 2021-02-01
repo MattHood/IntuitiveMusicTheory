@@ -5,9 +5,9 @@ import "@webcomponents/webcomponentsjs/webcomponents-loader"
 import "@webcomponents/custom-elements/src/native-shim"
 import * as Tone from 'tone'
 
-import { FrequencyResolutionApplet } from './frequency-resolution-applet'
-import * as Aural from './aural-object';
-import * as NP from './note-parser'
+import { FrequencyResolutionApplet } from './libintuitive/frequency-resolution-applet'
+import * as Aural from './libintuitive/aural-object';
+import * as NP from './libintuitive/note-parser'
 
 Reveal.initialize({
 	  width: "100%",
