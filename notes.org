@@ -5,7 +5,7 @@
 - Guided self-discovery via interactivity
 - Avoid teaching common practise harmony. Focus instead on jazz and pop. In the latter case, investigate cyclic chord progressions as discussed by 12tone, Neely, etc.
 
-* Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together
+* DONE Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together
 **Why?** Sound is a wilderness of discordance and dissonance. The machinery of tuning, scales, chords is all about finding the 'good notes', the subset of dissonance that is consonance. This exercise gives the student an appreciation of the value of elementary music theory, by experiencing how bad things are without it. This will then be a source of motivation to continue learning.
 
 ** The 'inline-js' blocks :noexport:
@@ -53,6 +53,12 @@ Source: https://www.reddit.com/r/orgmode/comments/5bi6ku/tip_for_exporting_javas
 **** Should visual quantization occur on the time axis? Maybe not in the continuous mode? It's a bit jarring when the note doesn't go where you expect without a visual cue that placement is discrete
 
 
+* Song player
+** DONE Accept a shorthand notation
+** TODO Notation in presentation, via a div or span
+** Easy transposing
+** Graphics, title, indicator of playback
+
 * Intervals: Assign an emotional adjective to each interval (or any aural object really) and use the rest of the presentation
 
 Aural Interval objects could be placed inline with text, featuring
@@ -69,9 +75,11 @@ Aural Interval objects could be placed inline with text, featuring
 * Word definitions: terms that are defined in the course can be clicked to expand a definition (floating? inline?). This should work recursively.
 
 * Technical notes
-** TODO Fix no sound on iOS
+** DONE Fix no sound on iOS
 ** DONE Change name to "Intuitive Music Theory" ?
 
+** TODO Implement responsive design
+** TODO Use custom components for all of these things
 
 * Time tracking
 Clock in: 'C-c C-x C-i'
