@@ -80,6 +80,8 @@ Aural Interval objects could be placed inline with text, featuring
 
 ** TODO Implement responsive design
 ** TODO Use custom components for all of these things
+** TODO Filter illegal characters in note-parser using regex
+** TODO Spinoff into libintuitive
 
 * Time tracking
 Clock in: 'C-c C-x C-i'

@@ -1,6 +1,8 @@
 import Reveal from 'reveal.js'
 import 'reveal.js/dist/reveal.css'
 import 'reveal.js/dist/theme/black.css'
+import "@webcomponents/webcomponentsjs/webcomponents-loader"
+import "@webcomponents/custom-elements/src/native-shim"
 import * as Tone from 'tone'
 
 import { FrequencyResolutionApplet } from './frequency-resolution-applet'
@@ -34,9 +36,12 @@ Aural.fillSpans();
 // Slide 4
 let play = document.getElementById("aha");
 let synth = new Tone.PolySynth().toDestination();
-let tune: NP.Music = NP.shorthandPart("e4,16n e c a3,8n a d4 d d,16n f# f# g a g g g d,8n b3 e4 e e,16n d d e d");
+let tune: NP.Music = NP.shorthandPart("e4,16n e c a3,8n a d4 d d,16n f# f# g a g g g d,8n c e4 e e,16n d d e d");
 
 play.onclick = (e) => {
   NP.playMusic(tune, synth);
 }
+
+// Slide 5
+customElements.define('intuitive-tune-player', NP.TunePlayer);
 

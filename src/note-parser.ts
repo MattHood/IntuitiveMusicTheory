@@ -1,4 +1,6 @@
 import * as Tone from 'tone'
+import "@webcomponents/webcomponentsjs/webcomponents-loader"
+import "@webcomponents/custom-elements/src/native-shim"
 
 interface Note {
   pitchClass: string;
@@ -51,7 +53,7 @@ function stringToPitch(token: string): Maybe<{pitchClass: string, octave?: strin
   }
 
   let octaveSpec: RegExp = /([0-9\-+])/;
-  let classSpec: RegExp = /([a-z]*)/i;
+  let classSpec: RegExp = /([a-z])/i;
   if(classSpec.exec(pitch) == null) {
     return null;
   }
@@ -144,6 +146,7 @@ function accumulateTimecodes(notes: Note[]): Music {
   });
   return events;		 
 }
+  
 
 export function shorthandPart(note_string: string): Music {
   let phrase: Maybe<Note[]> = phraseToNotes(note_string);
@@ -165,3 +168,27 @@ export function playMusic(music: Music, synth: Tone.PolySynth) {
     synth.triggerAttackRelease(n.note, n.duration, n.time + Tone.now());
   });
 }
+
+// WebComponent for this thing
+export class TunePlayer extends HTMLElement {
+  music: Music;
+  synth: Tone.PolySynth;
+  constructor() {
+    super();
+
+    let shadow: ShadowRoot = this.attachShadow({mode: 'open'});
+    let button: HTMLButtonElement = document.createElement("button");
+    this.synth = new Tone.PolySynth().toDestination();
+    this.music = shorthandPart(this.innerHTML); // TODO, use inner text?
+    this.innerHTML = "";
+
+    button.innerHTML = this.getAttribute("title");
+    //button.style.width = "300px";
+    //button.style.height = "100px";
+    button.onclick = () => { playMusic(this.music, this.synth) };
+    shadow.appendChild(button);
+  }
+}
+
+// Check below if error, button
+//customElements.define('intuitive-tune-player', TunePlayer);
