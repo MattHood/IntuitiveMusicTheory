@@ -75,14 +75,13 @@ Aural Interval objects could be placed inline with text, featuring
 * Word definitions: terms that are defined in the course can be clicked to expand a definition (floating? inline?). This should work recursively.
 
 * Technical notes
-** DONE Fix no sound on iOS
-** DONE Change name to "Intuitive Music Theory" ?
-
 ** TODO Implement responsive design
 ** TODO Use custom components for all of these things
 ** TODO Filter illegal characters in note-parser using regex
-** TODO Spinoff into libintuitive
-
+** DONE Spinoff into libintuitive
+** TODO Separate notes.org for libintuitive
+** TODO Documentation.org for libintuitive
+** TODO Readme.org for libintuitive
 * Time tracking
 Clock in: 'C-c C-x C-i'
 Clock out: 'C-c C-x C-o'
