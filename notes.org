@@ -3,63 +3,30 @@
 
 * Principles
 - Guided self-discovery via interactivity
+- Aural training is essential for understanding music theory.
 - Avoid teaching common practise harmony. Focus instead on jazz and pop. In the latter case, investigate cyclic chord progressions as discussed by 12tone, Neely, etc.
 
-* DONE Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together
+
+* Tags used in this document :meta:
+** :meta:
+Pertaining to organisation of this document
+** :proposal:
+An idea that seems good, but may well have alternatives that are better
+** :openquestion:
+An assumption about which I feel unsure, and could use some input from others
+** :activity:
+A topic that could use some interactive demonstration
+** :explanation:
+A topic that will be explained to students.
+
+
+* Ideas
+** DONE Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together
 **Why?** Sound is a wilderness of discordance and dissonance. The machinery of tuning, scales, chords is all about finding the 'good notes', the subset of dissonance that is consonance. This exercise gives the student an appreciation of the value of elementary music theory, by experiencing how bad things are without it. This will then be a source of motivation to continue learning.
 
-** The 'inline-js' blocks :noexport:
-Support for 'inline-js' may be added via evaluation of the following elisp:
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'org-src-lang-modes '("inline-js" . javascript))
-(defvar org-babel-default-header-args:inline-js
-  '((:results . "html")
-    (:exports . "results")))
-(defun org-babel-execute:inline-js (body _params)
-  (format "<script type=\"text/javascript\">\n%s\n</script>" body))
-#+END_SRC
-
-#+RESULTS:
-: org-babel-execute:inline-js
-
-Source: https://www.reddit.com/r/orgmode/comments/5bi6ku/tip_for_exporting_javascript_source_block_to/
-
-** Implementation
-
-#+begin_export html
-<script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
-
-<script src="frequency-resolution-applet.js"></script>
-
-<div id="applet">Test</div>
-#+end_export
-
-#+begin_src inline-js :exports both
-  let parent = document.getElementById("applet");
-  let fra = new FrequencyResolutionApplet(parent, 700, 500, "major scale");
-  console.log("1");
-#+end_src
-
-*** To-dos
-**** DONE Use a polyphonic synth to address bugs in adjacent notes
-**** DONE Refactor into a single component
-**** DONE Adjust saturation brightness per mode.
-**** TODO Store tone.js locally
-**** DONE Snap rhythms to grid
-**** TODO Better looking notehead
-**** DONE Play notes in spatial order
-
-*** Open questions
-**** Should visual quantization occur on the time axis? Maybe not in the continuous mode? It's a bit jarring when the note doesn't go where you expect without a visual cue that placement is discrete
 
 
-* Song player
-** DONE Accept a shorthand notation
-** TODO Notation in presentation, via a div or span
-** Easy transposing
-** Graphics, title, indicator of playback
-
-* Intervals: Assign an emotional adjective to each interval (or any aural object really) and use the rest of the presentation
+** TODO Intervals: Assign an emotional adjective to each interval (or any aural object really) and use the rest of the presentation
 
 Aural Interval objects could be placed inline with text, featuring
 - Official term as text
@@ -67,26 +34,50 @@ Aural Interval objects could be placed inline with text, featuring
 - Student-prescribed colour
 - Plays the sound, with a random root note for relative objects
 
-* Guitar-hero style tapping game to learm rhythms. Allow building of custom levels. Score based on accuracy.
 
-* For relative pitch: play a song in a random key - first through earphones, then everyone together - note that they can still recognise the song even though the notes are totally different.
+** TODO For relative pitch: play a song in a random key - first through earphones, then everyone together - note that they can still recognise the song even though the notes are totally different.
 
 
-* Word definitions: terms that are defined in the course can be clicked to expand a definition (floating? inline?). This should work recursively.
+* Homework
+** A separate presentation that gives homework in between sessions. :proposal:
 
-* Technical notes
-** TODO Implement responsive design
-** TODO Use custom components for all of these things
-** TODO Filter illegal characters in note-parser using regex
-** DONE Spinoff into libintuitive
-** TODO Separate notes.org for libintuitive
-** TODO Documentation.org for libintuitive
-** TODO Readme.org for libintuitive
-* Time tracking
-Clock in: 'C-c C-x C-i'
-Clock out: 'C-c C-x C-o'
-** Test time tracking
-:LOGBOOK:
-CLOCK: [2021-01-25 Mon 18:59]--[2021-01-25 Mon 19:00] =>  0:01
-:END:
+* Outline
+** Where to put note names? Initially I was thinking at the beginning, but what if we ditched note names until later? It would really hammer home the relative pitch idea. Many people initally fail to fully appreciate that tonal music theory works the same in any key. :openquestion:
+
+**Module 1:** Ear training 101
+
+** "Where are the good notes?" Continuous to discrete frequency space :activity:
+*** Note names?
+** Relative pitch vs absolute
+*** Songs in different keys are still recognisable. Why? :activity:
+*** For the 99% of us without perfect pitch, one note is as good as another. :explanation:
+** Tones and semitones
+*** Tones and semitones are the building block of relative music theory :explanation:
+*** Learn to recognise :activity:
+*** Learn to recognise multiple in a row :activity:
+** What can we build with tones and semitones?
+*** Scales, using sequences of tones, semitones: 
+**** Take a random sequence of 7 tones and semitones to get different scale :activity:
+**** Give an example of the 'major' scale and the 'minor' scale. Emohasise that this is foreshadowing, rather than something they should fully understand, since the significance of these scales cannot be appreciated with the explanations given so far. :explanation:
+*** Chords, by combining tones, semitones to create bigger musical distances:
+**** Same as above: random sequence of 3 tone/semitone + tone/semitone combinations to build different chords :activity:
+**** Give examples of 'major' and 'minor' chord. This one is a little less arcane, since they will have played major and minor chords. Potential confusion around the common naming (major, minor) so reassure that this will be explained later. :explanation:
+*** Intervals, by combining an arbitrary number of tones/semitones:
+**** The work for this one will be done in the next module, so just give a few examples :activity:
+**** Since tone = semitone + semitone, note that it is easier to just use semitones when defining intervals. :explanation:
+
+
+**Module 2: ** To intervals and beyond
+** Intervals
+
+** Chords, built from intervals
+
+** Scales, built from intervals
+All with respect to a root note. Is this better than tone-semitone? Obscures the relative minor/major relationship, but I think that might be a red herring.
+
+!! Note the circular defintion. Scales are defined here in terms of intervals (minor 3rd, major 6th), but the intervals are named by the scale degree on which they are used
+*** Major
+*** Minor
+
+
 
