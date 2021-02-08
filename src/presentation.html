@@ -17,37 +17,110 @@
     <div class="slides">
       <section>
 	<h1>Intuitive Music Theory</h1>
-	<button id="startup">Allow Sound</button>
       </section>
+
+      <section>
+	<h2>Three Elements of Music</h2>
+	<ol>
+	  <li><u>Timbre:</u> The <i>sound</i> of a sound</li>
+	  <li><u>Rhythm:</u> When a note starts, and when it finishes.</li>
+	  <li><u>Pitch:</u> What we're going to learn about </li>
+	</ol>
+      </section>
+      <section>
+	<h3>Three Elements of Music</h3>
+	<intuitive-three-elements-of-music></intuitive-three-elements-of-music>
+      </section>
+
+      
       
       <section>
 	<h2> Where are the good notes? </h2> <br>
 	<div id="applet"></div>
       </section>
-      
       <section>
-	<h2>Slide 2</h2> <br>
-
-	<span class="aural-object">minor triad</span> <br>
-
-	<span class="aural-object">major triad</span> <br>
-
-	<span class="aural-object">major 2nd</span>
-
+	<h3>Continuous Pitch</h3>
+	<ul>
+	  <li>Lost in the wilderness</li>
+	  <li>Infinite number of choices</li>
+	  <li>Almost guaranteed to be out of tune</li>
+	</ul>
       </section>
-
       <section>
-	<h2>Take on Me</h2>
-	<button id="aha">Play</button>
+	<h3>Chromatic Scale</h3>
+	<intuitive-frequency-resolution-applet type="chromatic">
+	</intuitive-frequency-resolution-applet>
       </section>
-
       <section>
-	<h2>Custom Element</h2>
-	<intuitive-tune-player title="Take on Me">
-	  e4,16n e c a3,8n a d4 d d,16n f# f# g a
-	  g g g d,8n c e4 e e,16n d d e d
-	</intuitive-tune-player>
-      </section>
+	<h3>Chromatic Scale</h3>
+	<ul>
+	  <li>Reduce our options</li>
+	  <li>Notes are curated to 'work well' together</li>
+	  <li>
+	    <ul>
+	      <li>Greek prefix 'chroma-' meaning colour</li>
+	      <li>'Scale' meaning a set of notes</li>
+	      <li>=> Chromatic scale contains all of our musical colours</li>
+	    </ul>
+	  </li>
+	</ul>
+	</section>
+	<section>
+	  <h3>Major Scale</h3>
+	  <intuitive-frequency-resolution-applet type="major scale">
+	  </intuitive-frequency-resolution-applet>
+	</section>
+	<section>
+	  <h3>Major Chord</h3>
+	  <intuitive-frequency-resolution-applet type="major chord">
+	  </intuitive-frequency-resolution-applet>
+	</section>
+
+	<section>
+	  <h2>It's All Relative</h2>
+	  <ul>
+	    <li>
+	      <!-- Take on me -->
+	      <intuitive-tune-player tempo="90" transpose="random" title="Recognise this?">
+		e4,16n e c a3,8n a d4 d d,16n f# f# g a
+		g g g d,8n c e4 e e,16n d d e d
+	      </intuitive-tune-player>
+	    </li>
+	    <li>One note is as good as another</li>
+	    <li><intuitive-tune-player tempo="40" title="Emotional void">
+		c#,1m
+	    </intuitive-tune-player></li>
+	    <li><b>So how can we possibly experience music?</b></li>
+	  </ul>
+	</section>
+	<section>
+	  <h3>Musical Distance</h3>
+	  <ul>
+	    <li>Notes don't matter; the <i>distance</i> between them is what matters</li>
+	    <li>The same song can be played with different notes,
+	      as long as the distances between them remain consistent</li>
+	</section>
+
+
+	<section>
+	  <h2>Tones and Semitones</h2>
+	  <ul>
+	    <li>Measurements need units</li>
+	    <li>Units need intuition</li>
+	  </ul>
+	</section>
+	<section>
+	  <p><ul>
+	    <li>We only need to compare notes found in the chromatic scale</li>
+	    <li>So let's count the number of steps between the lower one and the higher one</li>
+	    <!-- Insert graphic -->
+	  </ul></p>
+	</section>
+	<section>
+	  <h3>Semitone</h3><p>One step along the chromatic scale</p>
+	  <h3>Tone</h3><p>Two steps along the chromatic scale</p>
+	</section>
+	
     </div>
   </div>
 

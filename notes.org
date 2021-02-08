@@ -26,6 +26,8 @@ A topic that will be explained to students.
 
 
 
+** TODO Live sequence that allows manipulation of rhythm, timbre and pitch
+
 ** TODO Intervals: Assign an emotional adjective to each interval (or any aural object really) and use the rest of the presentation
 
 Aural Interval objects could be placed inline with text, featuring
@@ -41,27 +43,68 @@ Aural Interval objects could be placed inline with text, featuring
 * Homework
 ** A separate presentation that gives homework in between sessions. :proposal:
 
+
 * Outline
 ** Where to put note names? Initially I was thinking at the beginning, but what if we ditched note names until later? It would really hammer home the relative pitch idea. Many people initally fail to fully appreciate that tonal music theory works the same in any key. :openquestion:
 
 **Module 1:** Ear training 101
 
-** "Where are the good notes?" Continuous to discrete frequency space :activity:
-*** Note names?
-** Relative pitch vs absolute
-*** Songs in different keys are still recognisable. Why? :activity:
-*** For the 99% of us without perfect pitch, one note is as good as another. :explanation:
+** Elements of sound, and what we're focusing on
+*** Timbre
+**** The /sound/ of a sound. If you play the same note on a piano, on a guitar, and on a saxophone, you can tell the difference between them. Timbre is that difference. :explanation:
+*** Rhythm
+**** For a given note, if you're thinking about when it starts and how long it goes for, you're thinking about rhythm. Rhythm can be steady and predictable as in rock or dance music, or flowy and unpredictable as in classical music. :explanation:
+*** Pitch
+**** This one is the easiest to hear and the hardest to define (luckily, they'll be hearing it), so we're going to focus on building an intuition for it. The purpose of this course is teach you some of the tools and strategies we have for choosing and organising our pitches. :explanation:
+**** Should I add a disclaimer about this being the set of tools inherited from european art music, and used in contemporary western music? :openquestion:
+*** Three sliders, one for each of timbre, rhythm and pitch. A sequence can be manipulated live to change each of these musical characterists independently. :activity:
+
+
+** "Where are the good notes?"
+*** Continuous to discrete frequency spectrum :activity:
+The words used here are consciously used without definition; terms will be clarified later.
+1. Continuous: Makes you kind of nauseous
+2. Chromatic scale: Not exactly a pleasant melody, but not quite so nauseating either.
+3. Major scale: Sounds melodic and recognisable.
+4. Major chord: Undeniably pleasant, lacks even the tension and interest of the diatonic.
+*** (1) There are an uncountably infinite number of pitches to choose from, and I'm not just referring to sounds that are perhaps too low or too high for a human to hear. For any pitch you choose, there are an infinite amount of pitches that are really close to it, and most of them will sound, as we often say, "out of tune". So if you just pick two pitches at random, your chances of picking two that sound good together are actually pretty low. You could say, at this stage, that our pitch is 'continuous' (as in the applet). :explanation:
+*** Examples of music that uses continuous pitch: 1) A child's first violin lesson 2) The theremin 3) Happy birthday :example:
+
+*** (2) So what we do is we reduce our options; we choose a finite number of pitches that work 'well' together. Mathematicians, engineers and pioneering music theorists have done the legwork for us here. For those of us who play instruments such piano, guitar, harp (...) - instruments with fixed pitches such as keys, frets or a bunch of strings - we get these notes for free. Other instruments such as vocals, violin, trumpet require training for a player to be able to hit these particular notes. This set of notes is known as the 'chromatic scale'; from the Greek prefix 'chroma' meaning colour. The chromatic scale is a palette, holding all the musical colours available to us. :explanation:
+*** Play an example of ascending-descending chromatic scale :example:
+
+*** It's here that our course truly begins. We're going to take the chromatic scale for granted, since it has been given to us by our instruments, and use it to reach our musical goals. By the end of this module, you'll understand how (3) and (4) have come about.
+
+** Relative pitch vs absolute. Need to include these defintitions? :openquestion:
+*** A song played in different keys is still recognisable. Why?  :activity:
+1. Listen once with earphones in
+2. Unplug earphones, play again, listen to everyone else's
+3. Plug earphones back in
+*** For the 99% of us without perfect pitch, one note is as good as another. A note by itself has no intrinsic emotional value, and we're unable tell notes apart, beyond 'high'-ish or 'low'-ish. :explanation:
+*** Demonstrate lack of emotion in one long tone. :example:
+*** So how can we possibly experience music?
+*** It turns out the what we're really hearing when we listen to music is the **distance** between the notes. Our experience is based on how much lower or higher a note is from the ones that came before it. This is why we're recognise the same song built out of totally different notes: as long as the distances between the notes stay the same, we can still recognise the tune. :explanation:
 ** Tones and semitones
-*** Tones and semitones are the building block of relative music theory :explanation:
+*** Like any measurement of distance, we need to gain an intuition for the units. I know that a kilometre is a distance that I can walk in ten minutes, and that the ground is bit less than six feet below my eyes. But 300 yards? I'm not sure whether I want to carry that groceries that far. :explanation:
+*** So you can see that it's going to be important for us to really understand and appreciate certain measurements of musical distance.
+*** We measure the distance between notes by counting the amount of steps seperating them on the chromatic scale. :explanation:
+*** Include a graphic with three different chromatic visualisations:
+- Multicolour staircase
+- Pseudo-keyboard
+- Pseudo-fretboard
+*** We're going to define two units that are worth knowing about. A 'semitone' is one step of the chromatic scale; a 'tone' is two steps.
 *** Learn to recognise :activity:
 *** Learn to recognise multiple in a row :activity:
 ** What can we build with tones and semitones?
 *** Scales, using sequences of tones, semitones: 
 **** Take a random sequence of 7 tones and semitones to get different scale :activity:
-**** Give an example of the 'major' scale and the 'minor' scale. Emohasise that this is foreshadowing, rather than something they should fully understand, since the significance of these scales cannot be appreciated with the explanations given so far. :explanation:
+**** Give an example of the 'major' scale and the 'minor' scale. Emphasise that this is foreshadowing, rather than something they should fully understand, since the significance of these scales cannot be appreciated with the explanations given so far. :explanation:
+**** This was step (3) (in the frequency resolution applet)
 *** Chords, by combining tones, semitones to create bigger musical distances:
 **** Same as above: random sequence of 3 tone/semitone + tone/semitone combinations to build different chords :activity:
 **** Give examples of 'major' and 'minor' chord. This one is a little less arcane, since they will have played major and minor chords. Potential confusion around the common naming (major, minor) so reassure that this will be explained later. :explanation:
+**** This was step (4) (in the frequency resolution applet)
+
 *** Intervals, by combining an arbitrary number of tones/semitones:
 **** The work for this one will be done in the next module, so just give a few examples :activity:
 **** Since tone = semitone + semitone, note that it is easier to just use semitones when defining intervals. :explanation:
