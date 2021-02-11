@@ -5,9 +5,11 @@ import "@webcomponents/webcomponentsjs/webcomponents-loader"
 import "@webcomponents/custom-elements/src/native-shim"
 import * as Tone from 'tone'
 
-import { FrequencyResolutionApplet } from './libintuitive/frequency-resolution-applet'
-import * as Aural from './libintuitive/aural-object';
-import * as NP from './libintuitive/note-parser'
+import ResponsiveFRA from './libintuitive/components/frequency-resolution-applet'
+import Aural from './libintuitive/components/aural-object';
+import * as NP from './libintuitive/components/note-parser'
+
+import TimbreRhythmPitch from './timbre-rhythm-pitch'
 
 Reveal.initialize({
 	  width: "100%",
@@ -17,31 +19,36 @@ Reveal.initialize({
 	  maxScale: 1
 });
 
-// Slide 1
-let startup: HTMLElement = document.getElementById("startup");
-startup.onclick = () => {
-  Tone.start();
-  startup.remove();
-}
+ResponsiveFRA.register();
+Aural.register();
 
 
-// Slide 2
-let parent = document.getElementById("applet");
-let FRA = new FrequencyResolutionApplet(700, 500, "major scale");
-parent.appendChild(FRA.getApplet());
-
-// Slide 3
-Aural.fillSpans();
 
 // Slide 4
 let play = document.getElementById("aha");
-let synth = new Tone.PolySynth().toDestination();
-let tune: NP.Music = NP.shorthandPart("e4,16n e c a3,8n a d4 d d,16n f# f# g a g g g d,8n c e4 e e,16n d d e d");
+let stop = document.getElementById("stopaha");
+let timbre: HTMLElement = document.getElementById("taha");
+let pitch = document.getElementById("paha");
+let rhythm = document.getElementById("raha");
+let t = new TimbreRhythmPitch();
 
 play.onclick = (e) => {
-  NP.playMusic(tune, synth);
+  t.play();
 }
 
-// Slide 5
-customElements.define('intuitive-tune-player', NP.TunePlayer);
+stop.onclick = (e) => {
+  t.stop();
+}
+
+timbre.oninput = (e) => {
+  t.timbre = e.target.value;
+}
+
+pitch.oninput = (e) => {
+  t.pitch = e.target.value;
+}
+
+rhythm.oninput = (e) => {
+  t.rhythm = e.target.value;
+}
 

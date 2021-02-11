@@ -30,13 +30,32 @@
       <section>
 	<h3>Three Elements of Music</h3>
 	<intuitive-three-elements-of-music></intuitive-three-elements-of-music>
+
+	<button id="aha">Play the Tune</button>
+	<button id="stopaha">Stop this train</button> <br>
+
+	<ul>
+	  <li>
+	    <u>Timbre:</u>
+	    <input type="range" id="taha" min="0" max="127" step="1"></input>
+	  </li>
+	  <li>
+	    <u>Rhythm:</u>
+	    <input type="range" id="raha" min="0" max="127" step="1"></input>
+	  </li>
+	  <li>
+	    <u>Pitch:</u>
+	    <input type="range" id="paha" min="0" max="127" step="1"></input>
+	  </li>
+	</ul>
       </section>
 
       
       
       <section>
 	<h2> Where are the good notes? </h2> <br>
-	<div id="applet"></div>
+	<intuitive-frequency-resolution-applet initial-tuning="continuous">
+	</intuitive-frequency-resolution-applet>
       </section>
       <section>
 	<h3>Continuous Pitch</h3>
@@ -48,7 +67,7 @@
       </section>
       <section>
 	<h3>Chromatic Scale</h3>
-	<intuitive-frequency-resolution-applet type="chromatic">
+	<intuitive-frequency-resolution-applet initial-tuning="chromatic">
 	</intuitive-frequency-resolution-applet>
       </section>
       <section>
@@ -67,12 +86,12 @@
 	</section>
 	<section>
 	  <h3>Major Scale</h3>
-	  <intuitive-frequency-resolution-applet type="major scale">
+	  <intuitive-frequency-resolution-applet initial-tuning="major scale">
 	  </intuitive-frequency-resolution-applet>
 	</section>
 	<section>
 	  <h3>Major Chord</h3>
-	  <intuitive-frequency-resolution-applet type="major chord">
+	  <intuitive-frequency-resolution-applet initial-tuning="major chord">
 	  </intuitive-frequency-resolution-applet>
 	</section>
 
