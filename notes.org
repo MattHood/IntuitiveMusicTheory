@@ -26,7 +26,7 @@ A topic that will be explained to students.
 
 
 
-** TODO Live sequence that allows manipulation of rhythm, timbre and pitch
+** DONE Live sequence that allows manipulation of rhythm, timbre and pitch
 
 ** TODO Intervals: Assign an emotional adjective to each interval (or any aural object really) and use the rest of the presentation
 
