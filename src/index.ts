@@ -7,7 +7,7 @@ import * as Tone from 'tone'
 
 import ResponsiveFRA from './libintuitive/components/frequency-resolution-applet'
 import Aural from './libintuitive/components/aural-object';
-import * as NP from './libintuitive/components/note-parser'
+import TunePlayer from './libintuitive/components/note-parser'
 import KeyboardGraphic from './libintuitive/components/keyboard-graphic'
 import BasicFretboardGraphic from './libintuitive/components/fretboard-graphic'
 import ChromaticScaleGraphic from './libintuitive/components/chromatic-scale-graphic'
@@ -27,6 +27,8 @@ Aural.register();
 KeyboardGraphic.register();
 BasicFretboardGraphic.register();
 ChromaticScaleGraphic.register();
+TunePlayer.register();
+
 
 
 
