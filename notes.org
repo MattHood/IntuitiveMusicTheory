@@ -40,6 +40,8 @@ Aural Interval objects could be placed inline with text, featuring
 ** TODO For relative pitch: play a song in a random key - first through earphones, then everyone together - note that they can still recognise the song even though the notes are totally different.
 
 
+
+
 * Homework
 ** A separate presentation that gives homework in between sessions. :proposal:
 
@@ -121,6 +123,5 @@ All with respect to a root note. Is this better than tone-semitone? Obscures the
 !! Note the circular defintion. Scales are defined here in terms of intervals (minor 3rd, major 6th), but the intervals are named by the scale degree on which they are used
 *** Major
 *** Minor
-
 
 

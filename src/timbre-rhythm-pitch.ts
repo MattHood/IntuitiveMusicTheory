@@ -1,4 +1,4 @@
-import { Music, playMusic, stringToMusic } from './libintuitive/components/note-parser'
+import { Music, MusicEvent, playMusic, stringToMusic } from './libintuitive/components/note-parser'
 import * as Tone from 'tone'
 
 const bassline: string = "F2,8n. Ab,16n   C3 Eb F,4n. F,16n Eb C,8n Bb2,4n. Ab Ab,16n G Eb,8n"
@@ -27,8 +27,6 @@ const kick: any = [{note: "F1", duration: "16n", time: "0"},
 		   {note: "C3", duration: "16n", time: "1:3:0"},
 		   {note: "Bb2", duration: "16n", time: "1:3:3", velocity: 0.6}
 		  ];
-
-
 
 class FX {
   verb: Tone.Reverb;
@@ -101,10 +99,6 @@ export default class TimbreRhythmPitch {
 
     this.fx.exit.toDestination();
 
-    this.timbre = 64;
-    this.pitch = 64;
-    this.rhythm = 64;
-
     const melodyPlayer = (time, value): void => {
       let note: string = Tone.Frequency(value.note).transpose(this.pitchShift).toNote();
 	    this.melodySynth.triggerAttackRelease(note, value.duration, time, value.velocity);
@@ -126,9 +120,19 @@ export default class TimbreRhythmPitch {
     const kickPlayer = (time, value): void => {
       this.kickSynth.triggerAttackRelease(value.note, value.duration, time, value.velocity);
     }
+
+    const toBBS = (me: MusicEvent) => {
+      return {...me, time: Tone.Time(me.time).toBarsBeatsSixteenths()};
+    };
+    let melodyData = stringToMusic(melody).map(toBBS);
+    let bassData = stringToMusic(bassline).map(toBBS);
+
+    this.timbre = 64;
+    this.pitch = 64;
+    this.rhythm = 64;
     
-    this.melodyPart = new Tone.Part(melodyPlayer, stringToMusic(melody)).start(0);
-    this.bassPart = new Tone.Part(bassPlayer, stringToMusic(bassline)).start(0);  
+    this.melodyPart = new Tone.Part(melodyPlayer, melodyData).start(0);
+    this.bassPart = new Tone.Part(bassPlayer, bassData).start(0);  
     this.chordPart = new Tone.Part(chordPlayer, chords).start(0);
     this.kickPart = new Tone.Part(kickPlayer, kick).start(0);
     
@@ -144,7 +148,7 @@ export default class TimbreRhythmPitch {
 
   set rhythm(r: number) {
     const scale = (num: number): number =>  (num / 127) * 80 + 40;
-    Tone.Transport.bpm.rampTo(scale(r));
+    Tone.Transport.bpm.value = scale(r);
   }
 
   set pitch(p: number) {

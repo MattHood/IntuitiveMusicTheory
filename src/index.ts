@@ -11,6 +11,7 @@ import TunePlayer from './libintuitive/components/note-parser'
 import KeyboardGraphic from './libintuitive/components/keyboard-graphic'
 import BasicFretboardGraphic from './libintuitive/components/fretboard-graphic'
 import ChromaticScaleGraphic from './libintuitive/components/chromatic-scale-graphic'
+import PlayPauseButton from './libintuitive/components/play-pause-button'
 
 import TimbreRhythmPitch from './timbre-rhythm-pitch'
 
@@ -28,23 +29,23 @@ KeyboardGraphic.register();
 BasicFretboardGraphic.register();
 ChromaticScaleGraphic.register();
 TunePlayer.register();
+PlayPauseButton.register();
 
 
 
 
 // Slide 4
-let play = document.getElementById("aha");
-let stop = document.getElementById("stopaha");
+let play = document.getElementById("teom-pp");
 let timbre: HTMLElement = document.getElementById("taha");
 let pitch = document.getElementById("paha");
 let rhythm = document.getElementById("raha");
 let t = new TimbreRhythmPitch();
 
-play.onclick = (e) => {
+play.onplay = (e) => {
   t.play();
 }
 
-stop.onclick = (e) => {
+play.onpause = (e) => {
   t.stop();
 }
 
