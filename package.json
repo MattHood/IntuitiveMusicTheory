@@ -26,6 +26,7 @@
   "dependencies": {
     "@webcomponents/custom-elements": "^1.4.3",
     "@webcomponents/webcomponentsjs": "^2.5.0",
+    "lit-element": "^2.4.0",
     "reveal.js": "^4.1.0",
     "tone": "^14.7.77"
   }
