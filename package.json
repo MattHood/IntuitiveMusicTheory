@@ -29,5 +29,8 @@
     "lit-element": "^2.4.0",
     "reveal.js": "^4.1.0",
     "tone": "^14.7.77"
-  }
+  },
+  "browserslist": [
+    "Chrome > 50"
+  ]
 }

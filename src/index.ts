@@ -12,8 +12,10 @@ import KeyboardGraphic from './libintuitive/components/keyboard-graphic'
 import BasicFretboardGraphic from './libintuitive/components/fretboard-graphic'
 import ChromaticScaleGraphic from './libintuitive/components/chromatic-scale-graphic'
 import PlayPauseButton from './libintuitive/components/play-pause-button'
+import {QuizOption, RegeneratingQuizzer} from './libintuitive/components/aural-quizzer'
 
 import TimbreRhythmPitch from './timbre-rhythm-pitch'
+
 
 Reveal.initialize({
 	  width: "100%",
@@ -30,6 +32,8 @@ BasicFretboardGraphic.register();
 ChromaticScaleGraphic.register();
 TunePlayer.register();
 PlayPauseButton.register();
+QuizOption.register();
+RegeneratingQuizzer.register();
 
 
 
