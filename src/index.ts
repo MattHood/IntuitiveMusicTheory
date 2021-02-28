@@ -3,6 +3,7 @@ import 'reveal.js/dist/reveal.css'
 import 'reveal.js/dist/theme/black.css'
 import "@webcomponents/webcomponentsjs/webcomponents-loader"
 import "@webcomponents/custom-elements/src/native-shim"
+import "construct-style-sheets-polyfill"
 
 import RegisterComponents from './libintuitive/components/components'
 import TimbreRhythmPitch from './timbre-rhythm-pitch'
@@ -24,5 +25,3 @@ trp.attachControls(document.getElementById("trp-pp"),
                    document.getElementById("trp-t"), 
                    document.getElementById("trp-r"), 
                    document.getElementById("trp-p"));
-
-
