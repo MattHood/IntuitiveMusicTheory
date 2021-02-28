@@ -1,176 +1,212 @@
 <html>
 
 <head>
-    <style>
-      canvas {
-	  border-radius: 10px;
-	  background-color: white;
-	  border: 0px solid #000;
-	  overflow: hidden;
-      }
-    </style>
+	<style>
+		canvas {
+			border-radius: 10px;
+			background-color: white;
+			border: 0px solid #000;
+			overflow: hidden;
+		}
+	</style>
+	<link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
 </head>
 
 <body>
-  
-  <div class="reveal">
-    <div class="slides">
-      <section>
-	<h1>Intuitive Music Theory</h1>
-      </section>
 
-      <section>
-	<h2>Three Elements of Music</h2>
-	<ol>
-	  <li><u>Timbre:</u> The <i>sound</i> of a sound</li>
-	  <li><u>Rhythm:</u> When a note starts, and when it finishes.</li>
-	  <li><u>Pitch:</u> What we're going to learn about </li>
-	</ol>
-      </section>
-      <section>
-	<h3>Three Elements of Music</h3>
-	<intuitive-three-elements-of-music></intuitive-three-elements-of-music>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Intuitive Music Theory</h1>
+			</section>
 
-	<intuitive-play-pause-button id="teom-pp" title="Groove"></intuitive-play-pause-button> <br>
+			<section>
+				<h2>Three Elements of Music</h2>
+				<ol>
+					<li><u>Timbre:</u> The <i>sound</i> of a sound</li>
+					<li><u>Rhythm:</u> When a note starts, and when it finishes.</li>
+					<li><u>Pitch:</u> What we're going to learn about </li>
+				</ol>
+			</section>
+			
+			<section>
+				<h3>Three Elements of Music</h3>
+				<intuitive-three-elements-of-music></intuitive-three-elements-of-music>
 
-	<ul>
-	  <li>
-	    <u>Timbre:</u>
-	    <input type="range" id="taha" min="0" max="127" step="1"></input>
-	  </li>
-	  <li>
-	    <u>Rhythm:</u>
-	    <input type="range" id="raha" min="0" max="127" step="1"></input>
-	  </li>
-	  <li>
-	    <u>Pitch:</u>
-	    <input type="range" id="paha" min="0" max="127" step="1"></input>
-	  </li>
-	</ul>
-      </section>
+				<intuitive-play-pause-button id="trp-pp" title="Groove"></intuitive-play-pause-button> <br>
 
-    <section><h1>Where are the good notes?</h1></section>
-      
-      <section>
-	<h3> Continuous Pitch </h3> <br>
-	<intuitive-frequency-resolution-applet initial-tuning="continuous">
-	</intuitive-frequency-resolution-applet>
-      </section>
-      <section>
-	<h3>Continuous Pitch</h3>
-	<ul>
-	  <li>Lost in the wilderness</li>
-	  <li>Infinite number of choices</li>
-	  <li>Almost guaranteed to be out of tune</li>
-	</ul>
-      </section>
-      <section>
-	<h3>Chromatic Scale</h3>
-	<intuitive-frequency-resolution-applet initial-tuning="chromatic">
-	</intuitive-frequency-resolution-applet>
-      </section>
-      <section>
-	<h3>Chromatic Scale</h3>
-	<ul>
-	  <li>Reduce our options</li>
-	  <li>Notes are curated to 'work well' together</li>
-	  <li>
-	    <ul>
-	      <li>Greek prefix 'chroma-' meaning colour</li>
-	      <li>'Scale' meaning a set of notes</li>
-	      <li>=> Chromatic scale contains all of our musical colours</li>
-	    </ul>
-	  </li>
-	</ul>
-	</section>
-	<section>
-	  <h3>Major Scale</h3>
-	  <intuitive-frequency-resolution-applet initial-tuning="major scale">
-	  </intuitive-frequency-resolution-applet>
-	</section>
-	<section>
-	  <h3>Major Chord</h3>
-	  <intuitive-frequency-resolution-applet initial-tuning="major chord">
-	  </intuitive-frequency-resolution-applet>
-	</section>
+				<ul>
+					<li>
+						<u>Timbre:</u>
+						<input type="range" id="trp-t" min="0" max="127" step="1"></input>
+					</li>
+					<li>
+						<u>Rhythm:</u>
+						<input type="range" id="trp-r" min="0" max="127" step="1"></input>
+					</li>
+					<li>
+						<u>Pitch:</u>
+						<input type="range" id="trp-p" min="0" max="127" step="1"></input>
+					</li>
+				</ul>
+			</section>
 
-	<section>
-	  <h2>It's All Relative</h2>
-	  <ul>
-	    <li>
-	      <!-- Take on me -->
-	      <intuitive-tune-player tempo="105" transpose="random" title="Recognise this?">
-		e4,16n e c a3,8n a d4 d d,16n f# f# g a
-		g g g d,8n c e4 e e,16n d d e d
-	      </intuitive-tune-player>
-	    </li>
-	    <li>One note is as good as another</li>
-	    <li><intuitive-tune-player tempo="40" title="Emotional void">
-		c#,1m
-	    </intuitive-tune-player></li>
-	    <li><b>So how can we possibly experience music?</b></li>
-	  </ul>
-	</section>
-	<section>
-	  <h3>Musical Distance</h3>
-	  <ul>
-	    <li>Notes don't matter; the <i>distance</i> between them is what matters</li>
-	    <li>The same song can be played with different notes,
-	      as long as the distances between them remain consistent</li>
-	</section>
+			<section>
+				<h1>Where are the good notes?</h1>
+			</section>
+
+			<section data-auto-animate>
+				<h3> Continuous Pitch </h3> <br>
+				<intuitive-frequency-resolution-applet initial-tuning="continuous">
+				</intuitive-frequency-resolution-applet>
+			</section>
+
+			<section data-auto-animate>
+				<h3>Continuous Pitch</h3>
+				<ul>
+					<li>Lost in the wilderness</li>
+					<li>Infinite number of choices</li>
+					<li>Almost guaranteed to be out of tune</li>
+				</ul>
+			</section>
+
+			<section data-auto-animate-unmatched="false" data-auto-animate>
+				<h3>Chromatic Scale</h3>
+				<intuitive-frequency-resolution-applet initial-tuning="chromatic">
+				</intuitive-frequency-resolution-applet>
+			</section>
+
+			<section data-auto-animate>
+				<h3>Chromatic Scale</h3>
+				<ul>
+					<li>Reduce our options</li>
+					<li>Notes are curated to 'work well' together</li>
+					<li>
+						<ul>
+							<li>Greek prefix 'chroma-' meaning colour</li>
+							<li>'Scale' meaning a set of notes</li>
+							<li>=> Chromatic scale contains all of our musical colours</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Major Scale</h3>
+				<intuitive-frequency-resolution-applet initial-tuning="major scale">
+				</intuitive-frequency-resolution-applet>
+			</section>
+
+			<section>
+				<h3>Major Chord</h3>
+				<intuitive-frequency-resolution-applet initial-tuning="major chord">
+				</intuitive-frequency-resolution-applet>
+			</section>
+
+			<section>
+				<div class="container">
+					<h2>It's All Relative</h2>
+
+					<div class="tile is-ancestor">
+						<div class="tile is-parent is-vertical">
+
+							<div class="tile is-child">
+								<!-- Take on me -->
+								<intuitive-tune-player tempo="105" transpose="random" title="Recognise this?">
+									e4,16n e c a3,8n a d4 d d,16n f# f# g a
+									g g g d,8n c e4 e e,16n d d e d
+								</intuitive-tune-player>
+							</div>
 
 
-	<section>
-	  <h2>'Tones' and 'Semitones'</h2>
-	  <ul>
-	    <li>Measurements need units</li>
-	    <li>Units need intuition</li>
-	  </ul>
-	</section>
-	<section>
-	  
-	    <p>We only need to compare notes found in the chromatic scale</p>
 
-		<intuitive-chromatic-scale-graphic scale="1" horizontalOffset="1.8" verticalOffset="0.8"></intuitive-chromatic-scale-graphic>
+							<article class="tile is-child is-info notification">
 
-		<p>Our instruments give us these notes for free</p> 
+								One note is as good as another <br />
+								<intuitive-tune-player tempo="40" title="Emotional void">
+									c#,1m
+								</intuitive-tune-player>
+							</article>
 
-		<intuitive-keyboard-graphic scale="0.6"></intuitive-keyboard-graphic>
-		<intuitive-basic-fretboard-graphic scale="1" frets="4"></intuitive-basic-fretboard-graphic>
-		
-	    <p>So let's count the number of steps between the lower note and the higher note</p>
-	    
-	  
-	</section>
-	<section>
-		<intuitive-aural type="minor 2nd"><h3><a>Semitone</a></h3></intuitive-aural>
-	  	<p>One step along the chromatic scale</p>
-		<intuitive-keyboard-graphic scale="0.6" select="[5,6,11,12]" octaves="1"></intuitive-keyboard-graphic>
-		<intuitive-basic-fretboard-graphic scale="1" frets="4" select="[[1,2],[1,3],[5,1],[5,2]]"></intuitive-basic-fretboard-graphic>
-		<intuitive-chromatic-scale-graphic select="[2,3,7,8]"></intuitive-chromatic-scale-graphic>
-	</section>	
-	<section>
-		<intuitive-aural type="major 2nd"><h3><a>Tone</a></h3></intuitive-aural>
-			<p>Two steps along the chromatic scale</p>
-		<intuitive-keyboard-graphic scale="0.6" select="[5,7,10,12]" octaves="1"></intuitive-keyboard-graphic>
-		<intuitive-basic-fretboard-graphic scale="1" frets="4" select="[[1,2],[1,4],[5,1],[5,3]]"></intuitive-basic-fretboard-graphic>
-		<intuitive-chromatic-scale-graphic select="[1,3,8,10]"></intuitive-chromatic-scale-graphic>
-	</section>
 
-	<section>
-		<h2>Can you hear the difference?</h2>
-		<intuitive-regenerating-aural-quiz>
-			<intuitive-quiz-option auralname="Semitone"></intuitive-quiz-option>
-			<intuitive-quiz-option auralname="Tone"></intuitive-quiz-option>
-		</intuitive-regenerating-aural-quiz>
+							<div class="tile is-child">
+								<b>So how can we possibly experience music?</b>
+							</div>
+						</div>
+					</div>
+				</div>
 
-	</section>
-	
-    </div>
-  </div>
+			</section>
 
-  <script src="./index.ts"></script>
-    
+			<section>
+				<div class="container">
+					<h3>Musical Distance</h3>
+					<ul>
+						<li>Notes don't matter; the <i>distance</i> between them is what matters</li>
+						<li>The same song can be played with different notes,
+							as long as the distances between them remain consistent</li>
+					</ul>
+				</div>
+			</section>
+
+
+			<section>
+				<h2>'Tones' and 'Semitones'</h2>
+				<ul>
+					<li>Measurements need units</li>
+					<li>Units need intuition</li>
+				</ul>
+			</section>
+
+			<section>
+				<p>We only need to compare notes found in the chromatic scale</p>
+
+				<intuitive-chromatic-scale-graphic scale="1" horizontalOffset="1.8" verticalOffset="0.8">
+				</intuitive-chromatic-scale-graphic>
+
+				<p>Our instruments give us these notes for free</p>
+
+				<intuitive-keyboard-graphic scale="0.6"></intuitive-keyboard-graphic>
+				<intuitive-basic-fretboard-graphic scale="1" frets="4"></intuitive-basic-fretboard-graphic>
+
+				<p>So let's count the number of steps between the lower note and the higher note</p>
+			</section>
+
+			<section>
+				<intuitive-aural type="minor 2nd">
+					<h3><a>Semitone</a></h3>
+				</intuitive-aural>
+				<p>One step along the chromatic scale</p>
+				<intuitive-keyboard-graphic scale="0.6" select="[5,6,11,12]" octaves="1"></intuitive-keyboard-graphic>
+				<intuitive-basic-fretboard-graphic scale="1" frets="4" select="[[1,2],[1,3],[5,1],[5,2]]">
+				</intuitive-basic-fretboard-graphic>
+				<intuitive-chromatic-scale-graphic select="[2,3,7,8]"></intuitive-chromatic-scale-graphic>
+			</section>
+
+			<section>
+				<intuitive-aural type="major 2nd">
+					<h3><a>Tone</a></h3>
+				</intuitive-aural>
+				<p>Two steps along the chromatic scale</p>
+				<intuitive-keyboard-graphic scale="0.6" select="[5,7,10,12]" octaves="1"></intuitive-keyboard-graphic>
+				<intuitive-basic-fretboard-graphic scale="1" frets="4" select="[[1,2],[1,4],[5,1],[5,3]]">
+				</intuitive-basic-fretboard-graphic>
+				<intuitive-chromatic-scale-graphic select="[1,3,8,10]"></intuitive-chromatic-scale-graphic>
+			</section>
+
+			<section>
+				<h2>Can you hear the difference?</h2>
+				<intuitive-regenerating-aural-quiz>
+					<intuitive-quiz-option auralname="Semitone"></intuitive-quiz-option>
+					<intuitive-quiz-option auralname="Tone"></intuitive-quiz-option>
+				</intuitive-regenerating-aural-quiz>
+			</section>
+
+		</div>
+	</div>
+
+	<script src="./index.ts"></script>
+
 </body>
 
 </html>
