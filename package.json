@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/MattHood/IntuitiveMusicTheory#readme",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-decorators": "^7.13.5",
+    "@babel/preset-typescript": "^7.13.0",
     "@parcel/optimizer-cssnano": "^2.0.0-nightly.611",
     "@parcel/optimizer-htmlnano": "^2.0.0-nightly.611",
     "@parcel/packager-css": "^2.0.0-nightly.611",
@@ -48,6 +50,6 @@
     "tone": "^14.7.77"
   },
   "browserslist": [
-    "Chrome > 50"
+    "chrome > 50"
   ]
 }
