@@ -8,6 +8,10 @@
 			border: 0px solid #000;
 			overflow: hidden;
 		}
+
+		.reveal h1 {
+			margin-top: -270px;
+		}
 	</style>
 	<link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
 </head>
@@ -18,16 +22,28 @@
 		<div class="slides">
 			<section>
 				<h1>Intuitive Music Theory</h1>
+				<h3>Part One: Ear Training</h3>
 				<intuitive-allow-audio></intuitive-allow-audio>
 			</section>
 
 			<section data-auto-animate>
 				<h2>Three Elements of Music</h2>
-				<ol data-id="teom">
-					<li><span data-id="teom"><u>Timbre:</u></span> The <i>sound</i> of a sound</li>
-					<li><u>Rhythm:</u> When a note starts, and when it finishes.</li>
-					<li><u>Pitch:</u> What we're going to learn about </li>
+				<div data-id="teom">
+				<ol>
+					<span data-id="trp-timbre"><li>
+						<u>Timbre:</u>
+						 The <i>sound</i> of a sound
+					</li></span> 
+					<li>
+						<span data-id="trp-rhythm"><u>Rhythm:</u></span> 
+						When a note starts, and when it finishes.
+					</li>
+					<li>
+						<span data-id="trp-pitch"><u>Pitch:</u></span> 
+						What we're going to learn about 
+					</li>
 				</ol>
+			</div>
 			</section>
 			
 			<section data-auto-animate>
@@ -35,21 +51,23 @@
 				<intuitive-three-elements-of-music></intuitive-three-elements-of-music>
 
 				<intuitive-play-pause-button id="trp-pp" title="Groove"></intuitive-play-pause-button> <br>
-
-				<ul>
+				<div data-id="teom">
+				<ol>
 					<li>
-						<span data-id="teom"><u>Timbre:</u></span>
+						<span data-id="trp-timbre"><u>Timbre:</u></span>
+						<!-- <u>Timbre:</u> -->
 						<input type="range" id="trp-t" min="0" max="127" step="1"></input>
 					</li>
 					<li>
-						<u>Rhythm:</u>
+						<span data-id="trp-rhythm"><u>Rhythm:</u></span> 
 						<input type="range" id="trp-r" min="0" max="127" step="1"></input>
 					</li>
 					<li>
-						<u>Pitch:</u>
+						<span data-id="trp-pitch"><u>Pitch:</u></span> 
 						<input type="range" id="trp-p" min="0" max="127" step="1"></input>
 					</li>
-				</ul>
+				</ol>
+			</div>
 			</section>
 
 			<section>
@@ -143,7 +161,7 @@
 				<div class="container">
 					<h3>Musical Distance</h3>
 					<ul>
-						<li>Notes don't matter; the <i>distance</i> between them is what matters</li>
+						<li>Notes don't matter; the distance between them is what matters</li>
 						<li>The same song can be played with different notes,
 							as long as the distances between them remain consistent</li>
 					</ul>

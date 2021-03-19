@@ -9,6 +9,11 @@ import RegisterComponents from './libintuitive/components/components'
 import TimbreRhythmPitch from './timbre-rhythm-pitch'
 import * as _ from 'lodash'
 
+import TrainTracks from 'url:./traintracks_carol_m_highsmith.jpg' 
+
+document.querySelectorAll("section").forEach( 
+	(section: HTMLElement) => section.dataset.backgroundImage = TrainTracks );
+
 Reveal.initialize({
 	  width: "100%",
 	  height: "100%",
