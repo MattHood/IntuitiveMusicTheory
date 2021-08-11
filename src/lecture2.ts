@@ -5,6 +5,9 @@ import "@webcomponents/webcomponentsjs/webcomponents-loader"
 import "@webcomponents/custom-elements/src/native-shim"
 import "construct-style-sheets-polyfill"
 
+
+import RegisterComponents from './libintuitive/components/components'
+
 Reveal.initialize({
     width: "100%",
     height: "100%",
@@ -12,3 +15,5 @@ Reveal.initialize({
     minScale: 1,
     maxScale: 1
 });
+
+RegisterComponents();
