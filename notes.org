@@ -18,7 +18,8 @@ An assumption about which I feel unsure, and could use some input from others
 A topic that could use some interactive demonstration
 ** :explanation:
 A topic that will be explained to students.
-
+** :problem:
+An explanation is missing its pre-requisite
 
 * Ideas
 ** DONE Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together
@@ -140,6 +141,8 @@ Important: Each letter of the musical alphabet is represented
 *** !! Note the circular defintion. Scales are defined here in terms of intervals (minor 3rd, major 6th), but the intervals are named by the scale degree on which they are used
 *** Major (T-T-S-T-T-T-S)
 *** Minor (T-S-T-T-S-T-T)
+*** Get them to trace along with their fingers as the example plays (when stack is shown), to perhaps gain a better intuition for how tones/semitones sound in context :activity:
+*** Also, play the scales on one's instrument :activity:
 
 ** Chords, built from tones/semitones
 
@@ -159,6 +162,8 @@ Note that these notes can appear in any order.
 *** Build off the relative pitch ideas of the previous lecture - one scale is as good as another. Reuse that same activity with a major scale rather than 'take on me'. :activity:
 
 *** TODO Check tag colour for tone/semitone, another colour for degrees
+
+*** I haven't yet explained octave equivalence and how the scales just keep looping. :problem:
 
 *** Make sure to add degrees /between/ the intervals
 
