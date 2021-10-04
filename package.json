@@ -4,7 +4,7 @@
   "description": "Interactive course on music theory",
   "private": true,
   "scripts": {
-    "build": "npx parcel build src/lecture2.html",
+    "build": "npx parcel build src/all.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

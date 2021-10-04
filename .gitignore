@@ -11,3 +11,6 @@ src/.vscode/launch.json
 .dir-locals.el
 notes.html
 .vscode/launch.json
+
+# Local Netlify folder
+.netlify
