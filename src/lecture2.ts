@@ -13,7 +13,24 @@ Reveal.initialize({
     height: "100%",
     margin: 0,
     minScale: 1,
-    maxScale: 1
+    maxScale: 1,
 });
 
 RegisterComponents();
+
+Reveal.on( 'fragmentshown', event => {
+    // event.fragment = the fragment DOM element
+    if((event.fragment as HTMLParagraphElement).id == "chromanim") {
+        const el = document.querySelector("intuitive-chromatic-animation");
+        el.setAttribute("circular", "true");
+    }
+  } );
+Reveal.on( 'fragmenthidden', event => {
+    // event.fragment = the fragment DOM element
+    if((event.fragment as HTMLParagraphElement).id == "chromanim") {
+        const el = document.querySelector("intuitive-chromatic-animation");
+        el.removeAttribute("circular");
+    }
+} );
+
+

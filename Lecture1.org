@@ -1,0 +1,12 @@
+
+** Elements of sound, and what we're focusing on
+
+
+*** Timbre
+**** The /sound/ of a sound. If you play the same note on a piano, on a guitar, and on a saxophone, you can tell the difference between them. Timbre is that difference. :explanation:
+*** Rhythm
+**** For a given note, if you're thinking about when it starts and how long it goes for, you're thinking about rhythm. Rhythm can be steady and predictable as in rock or dance music, or flowy and unpredictable as in classical music. :explanation:
+*** Pitch
+**** This one is the easiest to hear and the hardest to define (luckily, they'll be hearing it), so we're going to focus on building an intuition for it. The purpose of this course is teach you some of the tools and strategies we have for choosing and organising our pitches. :explanation:
+**** Should I add a disclaimer about this being the set of tools inherited from european art music, and used in contemporary western music? :openquestion:
+*** Three sliders, one for each of timbre, rhythm and pitch. A sequence can be manipulated live to change each of these musical characterists independently. :activity:
