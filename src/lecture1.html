@@ -1,12 +1,20 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+
+	<meta charset="UTF-8">
+
 	<style>
 		canvas {
 			border-radius: 10px;
 			background-color: white;
 			border: 0px solid #000;
 			overflow: hidden;
+		}
+
+		.reveal h1 {
+			margin-top: -270px;
 		}
 	</style>
 	<link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
@@ -18,37 +26,52 @@
 		<div class="slides">
 			<section>
 				<h1>Intuitive Music Theory</h1>
+				<h3>Part One: Ear Training</h3>
+				<intuitive-allow-audio></intuitive-allow-audio>
 			</section>
 
-			<section>
+			<section data-auto-animate>
 				<h2>Three Elements of Music</h2>
+				<div data-id="teom">
 				<ol>
-					<li><u>Timbre:</u> The <i>sound</i> of a sound</li>
-					<li><u>Rhythm:</u> When a note starts, and when it finishes.</li>
-					<li><u>Pitch:</u> What we're going to learn about </li>
+					<span data-id="trp-timbre"><li>
+						<u>Timbre:</u>
+						 The <i>sound</i> of a sound
+					</li></span> 
+					<li>
+						<span data-id="trp-rhythm"><u>Rhythm:</u></span> 
+						When a note starts, and when it finishes.
+					</li>
+					<li>
+						<span data-id="trp-pitch"><u>Pitch:</u></span> 
+						What we're going to learn about 
+					</li>
 				</ol>
+			</div>
 			</section>
 			
-			<section>
-				<h3>Three Elements of Music</h3>
+			<section data-auto-animate>
+				<h2>Three Elements of Music</h2>
 				<intuitive-three-elements-of-music></intuitive-three-elements-of-music>
 
 				<intuitive-play-pause-button id="trp-pp" title="Groove"></intuitive-play-pause-button> <br>
-
-				<ul>
+				<div data-id="teom" class="">
+				<ol>
 					<li>
-						<u>Timbre:</u>
+						<span data-id="trp-timbre"><u>Timbre:</u></span>
+						<!-- <u>Timbre:</u> -->
 						<input type="range" id="trp-t" min="0" max="127" step="1"></input>
 					</li>
 					<li>
-						<u>Rhythm:</u>
+						<span data-id="trp-rhythm"><u>Rhythm:</u></span> 
 						<input type="range" id="trp-r" min="0" max="127" step="1"></input>
 					</li>
 					<li>
-						<u>Pitch:</u>
+						<span data-id="trp-pitch"><u>Pitch:</u></span> 
 						<input type="range" id="trp-p" min="0" max="127" step="1"></input>
 					</li>
-				</ul>
+				</ol>
+			</div>
 			</section>
 
 			<section>
@@ -81,13 +104,7 @@
 				<ul>
 					<li>Reduce our options</li>
 					<li>Notes are curated to 'work well' together</li>
-					<li>
-						<ul>
-							<li>Greek prefix 'chroma-' meaning colour</li>
-							<li>'Scale' meaning a set of notes</li>
-							<li>=> Chromatic scale contains all of our musical colours</li>
-						</ul>
-					</li>
+					<li>The Chromatic Scale contains all of our musical colours</li>
 				</ul>
 			</section>
 
@@ -142,7 +159,7 @@
 				<div class="container">
 					<h3>Musical Distance</h3>
 					<ul>
-						<li>Notes don't matter; the <i>distance</i> between them is what matters</li>
+						<li>Notes don't matter; the distance between them is what matters</li>
 						<li>The same song can be played with different notes,
 							as long as the distances between them remain consistent</li>
 					</ul>
@@ -151,11 +168,8 @@
 
 
 			<section>
-				<h2>'Tones' and 'Semitones'</h2>
-				<ul>
-					<li>Measurements need units</li>
-					<li>Units need intuition</li>
-				</ul>
+				<h1>'Tones' and 'Semitones'</h1>
+				<p>The units of musical distance</p>
 			</section>
 
 			<section>
@@ -169,7 +183,7 @@
 				<intuitive-keyboard-graphic scale="0.6"></intuitive-keyboard-graphic>
 				<intuitive-basic-fretboard-graphic scale="1" frets="4"></intuitive-basic-fretboard-graphic>
 
-				<p>So let's count the number of steps between the lower note and the higher note</p>
+				<p>Let's count the number of steps between the lower note and the higher note</p>
 			</section>
 
 			<section>
@@ -203,14 +217,14 @@
 			</section>
 
 			<section>
-				<h2>What can we build out of them?</h2>
-				<intuitive-consecutive-intervals mode="scale"></intuitive-consecutive-intervals>
+				<h3>Thanks for coming</h3>
+				Next week, we'll see some musical applications of tones and semitones.
 			</section>
 
 		</div>
 	</div>
 
-	<script src="./index.ts"></script>
+	<script src="./lecture1.ts"></script>
 
 </body>
 

@@ -18,13 +18,15 @@ An assumption about which I feel unsure, and could use some input from others
 A topic that could use some interactive demonstration
 ** :explanation:
 A topic that will be explained to students.
-
+** :problem:
+An explanation is missing its pre-requisite
 
 * Ideas
 ** DONE Note picker that is able to illustrate the process of moving from continuous frequency space to discrete notes that work well together
 **Why?** Sound is a wilderness of discordance and dissonance. The machinery of tuning, scales, chords is all about finding the 'good notes', the subset of dissonance that is consonance. This exercise gives the student an appreciation of the value of elementary music theory, by experiencing how bad things are without it. This will then be a source of motivation to continue learning.
-
-
+** TODO Lines connecting the keys in the keyboard graphic.
+** TODO Dots on the fretboard graphic
+** TODO Make clickable versions of the keyboard, fretboard and chromatic graphics; then have exercises to select the correct notes.
 
 ** DONE Live sequence that allows manipulation of rhythm, timbre and pitch
 
@@ -37,19 +39,22 @@ Aural Interval objects could be placed inline with text, featuring
 - Plays the sound, with a random root note for relative objects
 
 
-** TODO For relative pitch: play a song in a random key - first through earphones, then everyone together - note that they can still recognise the song even though the notes are totally different.
+** DONE For relative pitch: play a song in a random key - first through earphones, then everyone together - note that they can still recognise the song even though the notes are totally different.
 
 
 
 
-* Homework
-** A separate presentation that gives homework in between sessions. :proposal:
+** Homework
+*** TODO A separate presentation that gives homework in between sessions. :proposal:
+
+** TODO Knowledge tree                                            :proposal:
+Duolingo-style tree that shows progress through the study plan
 
 
 * Outline
 ** Where to put note names? Initially I was thinking at the beginning, but what if we ditched note names until later? It would really hammer home the relative pitch idea. Many people initally fail to fully appreciate that tonal music theory works the same in any key. :openquestion:
 
-**Module 1:** Ear training 101
+* Lecture 1: Ear training 
 
 ** Elements of sound, and what we're focusing on
 *** Timbre
@@ -112,16 +117,79 @@ The words used here are consciously used without definition; terms will be clari
 **** Since tone = semitone + semitone, note that it is easier to just use semitones when defining intervals. :explanation:
 
 
-**Module 2: ** To intervals and beyond
-** Intervals
+* Lecture 2:  What is it all for?
+** What if we don't introduce major/minor n-th? Just use eg, b3, 2, #4 :openquestion:
+** Things are still pretty basic so far, many people may already be familiar with the content from at least the first and second lectures. Should this be addressed? :openquestion:
+** You'd want someone to be able to recognise all the intervals to consider them having completed basic ear training. Could you skip from tones and semitones to major/minor scales and major minor chords?  :openquestion:
+Essentially boils down to: can someone tell the difference a) between intervals, scales and chords aurally ) b) and major/minor in each category; without having learned all of the intervals?
+If so, it may turn out easier to recognise e.g. a b6 if they've already heard it in the minor scale they can recognise.
+This would follow the lecture content better.
+** Flashcard reinforcement to memorise these constructions? :proposal:
 
-** Chords, built from intervals
+** TODO Introduction
+*** We've established so far
 
-** Scales, built from intervals
+** Scales, built from tones/semitones
 All with respect to a root note. Is this better than tone-semitone? Obscures the relative minor/major relationship, but I think that might be a red herring.
 
-!! Note the circular defintion. Scales are defined here in terms of intervals (minor 3rd, major 6th), but the intervals are named by the scale degree on which they are used
-*** Major
-*** Minor
+Give fretboard/keyboard/stack examples. Note that the notes can appear in any order.
+
+Important: Each letter of the musical alphabet is represented
+
+*** Note how I didn't say "Gb" or "Db" - one rule, one convention we have is that each letter of the musical alphabet is represented exactly once in any major scale. This helps keep things consistent, and make it easier to remember which notes can be found in a key. :explanation:
+
+*** !! Note the circular defintion. Scales are defined here in terms of intervals (minor 3rd, major 6th), but the intervals are named by the scale degree on which they are used
+*** Major (T-T-S-T-T-T-S)
+*** Minor (T-S-T-T-S-T-T)
+*** Get them to trace along with their fingers as the example plays (when stack is shown), to perhaps gain a better intuition for how tones/semitones sound in context :activity:
+*** Also, play the scales on one's instrument :activity:
+
+** Chords, built from tones/semitones
+
+Give fretboard/keyboard/stack examples of each. Pull out actual notes.
+Note that these notes can appear in any order.
+*** Major (T-T, T-S)
+*** Guitarists might be furrowing their brows - doesn't my E major chord have six notes - not three? If you look at the note on each string, you'll see that there are still only three unique notes all up. E and B are repeated a few times. :explanation:
+*** Minor (T-S, T-T)
+*** Note the very small difference; small changes can have a dramatic impact on the emotional content of the music. :explanation:
+*** Diminished (T-S, T-S)
+*** Again, a very slight difference. In context, they each make us feel very different, despite a similar appearance on paper. :explanation:
+
+** Scale degrees \( \hat{1} \hat{2} \hat{3} \hat{4} \hat{5} \hat{6} \hat{7}\)
+
+*** So far, keeping track of tones and semitones feels a lot like book-keeping. It helps with finding the right notes on our instruments; it gives the most technically rigorous definition; but, it doesn't really help us to understand how and why these things /sound/ the way they do; why they /feel/ the way they do. What we're about to see may seem like yet more book-keeping, but it will actually help us understand why we hear things the way we do. :explanation:
+*** Each part of the scale has a certain role to play for the emotional expression of the music in which it's found.
+*** Build off the relative pitch ideas of the previous lecture - one scale is as good as another. Reuse that same activity with a major scale rather than 'take on me'. :activity:
+
+*** TODO Check tag colour for tone/semitone, another colour for degrees
+
+*** I haven't yet explained octave equivalence and how the scales just keep looping. :problem:
+
+*** Make sure to add degrees /between/ the intervals
+
+*** Minor scale, introducing altered degrees by comparison to major
+
+*** DIY scales with playback that give altered degrees           :activity:
 
 
+** Octaves: what happens when we get to 8?
+
+** Chords, built from scales
+
+*** Display scale degrees interleaved with intervals (T-S). When clicking a degree, highlight relevant notes, grey out irrelevant notes and play the chord arpeggio and together. Initially, only show one octave, but every time a chord that needs more notes is requested, extend out further. :activity:
+
+*** "Each scale /coincides/ with certain chords, by sharing the same tone-semitone pattern". Emphasis on the coincidence - chords exist outside of scales. Chords generated using this method will only have notes that are present in the scale, so they are more stable (they don't "work better").
+*** Much of the pop music we listen to relies on this stability to sound the way it does, so you'll find that many songs just use a few chords generated from one particular major scale.
+
+
+** Chord degrees \(I\ ii\ iii\ IV\ V\ vi\ vii^o \)
+ 
+*** Just as we numbered our scale degrees to reflect the fact each note has a role to play, consistent across different keys, so too does each chord based off of those notes. 
+
+*** Rather than decorate the arabic numerals in a different way, we use roman numerals in instead. Simply by convention, upper-case represents major, lower-case represents minor, and the little circle represents diminished.
+* Part 3: Progressing to progressions
+
+
+
+* Misc TODO
+** TODO Smooth transitions between slides
